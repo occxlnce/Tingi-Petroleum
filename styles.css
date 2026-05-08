@@ -1,0 +1,932 @@
+/* =========================================================
+   TINGI PETROLEUM — Constructivist Design System
+   Aesthetic: Soviet Constructivism × Minimalism
+   Type: Arimo (display) / Inter (body) / JetBrains Mono (data)
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  --blue: #003366;
+  --blue-deep: #00224a;
+  --blue-darker: #001830;
+  --yellow: #FFD800;
+  --yellow-warm: #fcc800;
+  --black: #0a0a0a;
+  --white: #ffffff;
+  --paper: #f6f5f0;
+  --gray: #e6e5e0;
+  --rule: rgba(0, 51, 102, 0.1);
+  --rule-yellow: rgba(255, 216, 0, 0.25);
+
+  --display: 'Arimo', sans-serif;
+  --body: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+
+  --max: 1400px;
+  --gutter: clamp(24px, 4vw, 60px);
+  --header-h: 80px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--blue);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.65;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; }
+
+::selection { background: var(--yellow); color: var(--blue); }
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+.display, h1, h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 0.93;
+}
+h3, h4 {
+  font-family: var(--display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: clamp(52px, 9vw, 148px); }
+h2 { font-size: clamp(38px, 5.5vw, 80px); }
+h3 { font-size: clamp(22px, 2.2vw, 32px); }
+h4 { font-size: 18px; }
+
+p { margin: 0 0 1em; }
+
+/* Triangle marker replaces dot — core Constructivist element */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  color: var(--yellow);
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow.dark { color: var(--blue); }
+.eyebrow .dot {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 6px solid var(--yellow);
+  border-top: 3.5px solid transparent;
+  border-bottom: 3.5px solid transparent;
+  flex-shrink: 0;
+}
+.eyebrow.dark .dot { border-left-color: var(--blue); }
+
+.mono { font-family: var(--mono); }
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: var(--header-h);
+  background: var(--blue);
+  color: var(--white);
+}
+
+/* Yellow diagonal accent — constructivist left-side marker */
+.site-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 200px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--yellow) 70%, transparent 100%);
+  pointer-events: none;
+}
+
+.nav-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.brand { display: flex; align-items: center; gap: 14px; color: var(--white); }
+.brand .mark { width: 42px; height: 42px; flex-shrink: 0; }
+.brand-text { line-height: 1; }
+.brand-text .name {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  color: var(--white);
+}
+.brand-text .sub {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  color: var(--yellow);
+  margin-top: 4px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: rgba(255,255,255,0.65);
+  padding: 6px 0;
+  position: relative;
+  transition: color .25s ease;
+}
+/* Thin underline — constructivist precision */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--yellow);
+  transition: width .35s cubic-bezier(.22,1,.36,1);
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { width: 100%; }
+.nav-links a.active { color: var(--yellow); }
+.nav-links a.active::after { width: 100%; }
+
+/* Parallelogram CTA button — skewed geometric */
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--yellow);
+  color: var(--blue);
+  padding: 12px 26px 12px 22px;
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--yellow);
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.nav-cta:hover { background: transparent; color: var(--yellow); }
+.nav-cta .arrow { transition: transform .3s ease; }
+.nav-cta:hover .arrow { transform: translateX(4px); }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 36px; height: 36px;
+  align-items: center;
+  justify-content: center;
+}
+.nav-toggle span {
+  width: 20px; height: 1.5px;
+  background: var(--yellow);
+  transition: transform .3s;
+}
+
+@media (max-width: 1024px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-links.open {
+    display: flex;
+    position: fixed;
+    inset: var(--header-h) 0 0 0;
+    background: var(--blue);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 50px var(--gutter);
+    gap: 20px;
+  }
+  /* Constructivist left-accent on mobile menu */
+  .nav-links.open::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--yellow);
+  }
+  .nav-links.open a {
+    font-size: 26px;
+    font-family: var(--display);
+    padding: 12px 0;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: -0.01em;
+  }
+  .nav-links.open a::after { bottom: 0; }
+}
+
+/* =========================================================
+   MAIN / SECTION
+   ========================================================= */
+main { padding-top: var(--header-h); position: relative; z-index: 2; }
+
+section { position: relative; padding: clamp(80px, 10vw, 140px) 0; }
+
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================================================
+   PAGE HERO (inner pages)
+   ========================================================= */
+.page-hero {
+  background: var(--blue);
+  color: var(--white);
+  padding: clamp(80px, 10vw, 140px) 0 clamp(60px, 8vw, 100px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Constructivist geometric circle — large, partially off-screen, outlined only */
+.page-hero::before {
+  content: "";
+  position: absolute;
+  right: -180px; top: 50%;
+  transform: translateY(-50%);
+  width: 520px; height: 520px;
+  border-radius: 50%;
+  border: 80px solid rgba(255,216,0,0.06);
+  pointer-events: none;
+}
+/* Secondary smaller circle */
+.page-hero::after {
+  content: "";
+  position: absolute;
+  right: 160px; bottom: -60px;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,216,0,0.15);
+  pointer-events: none;
+}
+
+.page-hero-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 40px;
+}
+
+.page-hero h1 {
+  color: var(--white);
+  font-size: clamp(52px, 8.5vw, 130px);
+}
+.page-hero h1 em { color: var(--yellow); font-style: normal; }
+.page-hero .lede {
+  margin-top: 28px;
+  max-width: 580px;
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.75;
+  color: rgba(255,255,255,0.7);
+}
+
+.hero-meta {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,216,0,0.2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  font-family: var(--mono);
+}
+.hero-meta-item .lbl {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: rgba(255,216,0,0.55);
+}
+.hero-meta-item .val {
+  margin-top: 5px;
+  font-size: 13px;
+  color: var(--white);
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 28px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  border: 1px solid;
+  transition: background .25s ease, color .25s ease, border-color .25s ease;
+  cursor: pointer;
+}
+.btn-yellow { background: var(--yellow); color: var(--blue); border-color: var(--yellow); }
+.btn-yellow:hover { background: var(--blue); color: var(--yellow); border-color: var(--blue); }
+.btn-blue { background: var(--blue); color: var(--white); border-color: var(--blue); }
+.btn-blue:hover { background: var(--yellow); color: var(--blue); border-color: var(--yellow); }
+.btn-ghost { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.3); }
+.btn-ghost:hover { border-color: var(--yellow); color: var(--yellow); }
+.btn-outline { background: transparent; color: var(--blue); border-color: var(--blue); }
+.btn-outline:hover { background: var(--blue); color: var(--yellow); }
+.btn .arrow { transition: transform .3s ease; }
+.btn:hover .arrow { transform: translateX(5px); }
+
+/* =========================================================
+   TICKER BAR
+   ========================================================= */
+.ticker {
+  background: var(--blue);
+  color: var(--yellow);
+  overflow: hidden;
+  position: relative;
+}
+/* Yellow left accent */
+.ticker::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0;
+  width: 4px; height: 100%;
+  background: var(--yellow);
+  z-index: 2;
+}
+.ticker-track {
+  display: flex;
+  gap: 60px;
+  white-space: nowrap;
+  padding: 14px 0 14px 20px;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  animation: tickerScroll 28s linear infinite;
+}
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker-track span { display: inline-flex; align-items: center; gap: 60px; }
+/* Triangle separator */
+.ticker-track .dot {
+  display: inline-block;
+  width: 0; height: 0;
+  border-left: 6px solid var(--yellow);
+  border-top: 3.5px solid transparent;
+  border-bottom: 3.5px solid transparent;
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+.section-head { max-width: 800px; margin-bottom: 70px; }
+.section-head .eyebrow { margin-bottom: 22px; }
+.section-head h2 { color: var(--blue); margin-bottom: 22px; }
+/* Yellow color on em — no highlight box */
+.section-head h2 em { color: var(--yellow); font-style: normal; }
+.section-head .lede {
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--blue);
+  max-width: 640px;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+/* =========================================================
+   STAT BLOCKS
+   ========================================================= */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+}
+@media (min-width: 800px) { .stat-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1100px) { .stat-grid { grid-template-columns: repeat(6, 1fr); } }
+
+.stat {
+  position: relative;
+  padding: 40px 28px;
+  border-right: 1px solid rgba(255,216,0,0.12);
+  border-bottom: 1px solid rgba(255,216,0,0.12);
+  overflow: hidden;
+}
+.stat:last-child { border-right: none; }
+
+/* Triangle corner accent — core Constructivist shape */
+.stat::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  border-left: 32px solid var(--yellow);
+  border-bottom: 32px solid transparent;
+  opacity: 0.3;
+  transition: opacity .3s ease;
+}
+.stat:hover::before { opacity: 1; }
+
+.stat .num {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(42px, 5vw, 64px);
+  line-height: 1;
+  color: var(--yellow);
+  letter-spacing: -0.03em;
+}
+.stat .lbl {
+  margin-top: 14px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.65);
+  font-weight: 500;
+}
+.stat .sub {
+  margin-top: 3px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+}
+.stat .corner {
+  position: absolute;
+  top: 14px; right: 16px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: rgba(255,216,0,0.35);
+  font-weight: 700;
+}
+
+@media (max-width: 1099px) {
+  .stat:nth-child(3n) { border-right: none; }
+}
+@media (max-width: 799px) {
+  .stat:nth-child(3n) { border-right: 1px solid rgba(255,216,0,0.12); }
+  .stat:nth-child(2n) { border-right: none; }
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer {
+  background: var(--blue-darker);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Large circle geometry — Constructivist background element */
+.site-footer::before {
+  content: "";
+  position: absolute;
+  right: -150px; bottom: -150px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,216,0,0.05);
+  pointer-events: none;
+}
+.site-footer::after {
+  content: "";
+  position: absolute;
+  right: -50px; bottom: -50px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,216,0,0.04);
+  pointer-events: none;
+}
+
+.footer-top {
+  padding: 80px 0 60px;
+  border-bottom: 1px solid rgba(255,216,0,0.08);
+  position: relative;
+}
+/* Left-aligned yellow accent replaces 8px top bar */
+.footer-top::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 60px; height: 3px;
+  background: var(--yellow);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 50px;
+  padding-top: 40px;
+}
+@media (min-width: 700px) { .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 40px; } }
+
+.footer-brand .name {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 36px;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  line-height: 1;
+}
+.footer-brand .sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.34em;
+  color: var(--yellow);
+  margin-top: 5px;
+}
+.footer-brand p {
+  margin-top: 20px;
+  font-size: 13px;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.5);
+  max-width: 280px;
+}
+
+.footer-col h5 {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: var(--yellow);
+  margin-bottom: 22px;
+  padding-left: 12px;
+  border-left: 2px solid var(--yellow);
+}
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 10px; }
+.footer-col a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  transition: color .2s ease;
+}
+.footer-col a:hover { color: var(--yellow); }
+
+.footer-bottom {
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.3);
+}
+.footer-bottom .status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--yellow);
+}
+.footer-bottom .status::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+}
+
+/* =========================================================
+   COMPONENT: CARD (clean, left-accent only)
+   ========================================================= */
+.cell {
+  position: relative;
+  background: var(--white);
+  padding: 36px 32px;
+  border-left: 3px solid transparent;
+  transition: border-left-color .3s ease;
+}
+.cell:hover { border-left-color: var(--yellow); }
+.cell .cell-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--yellow);
+  font-weight: 700;
+}
+.cell h3, .cell h4 { margin-top: 18px; color: var(--blue); }
+.cell p {
+  margin-top: 12px;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--blue);
+  opacity: 0.8;
+}
+
+/* =========================================================
+   REVEAL ON SCROLL
+   ========================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .9s ease, transform .9s cubic-bezier(.22,1,.36,1);
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+.form-wrap {
+  background: var(--white);
+  padding: clamp(32px, 4vw, 56px);
+  position: relative;
+}
+/* Constructivist corner triangle */
+.form-wrap::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  border-left: 48px solid var(--yellow);
+  border-bottom: 48px solid transparent;
+}
+
+.field { margin-bottom: 28px; }
+.field label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  color: var(--blue);
+  margin-bottom: 10px;
+  opacity: 0.65;
+}
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0,51,102,0.2);
+  padding: 12px 0;
+  font-family: var(--body);
+  font-size: 16px;
+  color: var(--blue);
+  border-radius: 0;
+  transition: border-color .2s ease;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--yellow-warm);
+}
+.field textarea { resize: vertical; min-height: 120px; }
+
+@media (min-width: 720px) {
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+}
+
+/* =========================================================
+   CTA BAND
+   ========================================================= */
+.cta-band {
+  background: var(--blue);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+  /* Diagonal clip — key Constructivist shape */
+  clip-path: polygon(0 24px, 100% 0, 100% calc(100% - 24px), 0 100%);
+  padding: 110px 0;
+}
+
+/* Concentric circle decoration — constructivist geometric */
+.cta-band::before {
+  content: "";
+  position: absolute;
+  right: -80px; top: 50%;
+  transform: translateY(-50%);
+  width: 440px; height: 440px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,216,0,0.1);
+  pointer-events: none;
+}
+.cta-band::after {
+  content: "";
+  position: absolute;
+  right: -10px; top: 50%;
+  transform: translateY(-50%);
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,216,0,0.07);
+  pointer-events: none;
+}
+
+.cta-band .container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  align-items: center;
+}
+@media (min-width: 880px) { .cta-band .container { grid-template-columns: 1.4fr 1fr; gap: 80px; } }
+.cta-band h2 { color: var(--white); }
+.cta-band h2 em { color: var(--yellow); font-style: normal; }
+.cta-band p {
+  font-size: 17px;
+  max-width: 520px;
+  margin-top: 18px;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.72);
+}
+.cta-band .actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+.bg-blue { background: var(--blue); color: var(--white); }
+.bg-blue h2, .bg-blue h3, .bg-blue h4 { color: var(--white); }
+.bg-blue h2 em { color: var(--yellow); font-style: normal; }
+.bg-blue .lede { color: rgba(255,255,255,0.7); }
+.bg-blue .eyebrow.dark { color: var(--yellow); }
+.bg-blue .eyebrow.dark .dot { border-left-color: var(--yellow); }
+.bg-yellow { background: var(--yellow); color: var(--blue); }
+
+.text-yellow { color: var(--yellow); }
+.text-blue { color: var(--blue); }
+
+/* =========================================================
+   Minimal Industrial Surface Guard
+   Keeps cards/containers flat in the base stylesheet too.
+   ========================================================= */
+main :where(
+  .container,
+  .cell,
+  .comply,
+  .value-cell,
+  .svc-card,
+  .pillar,
+  .depot-card,
+  .process-step,
+  .sector,
+  .channel,
+  .hse-item,
+  .vma-block,
+  .govern-row,
+  .svc-feat,
+  .stat,
+  .map-wrap,
+  .legend-card,
+  .hq-info,
+  .contact-card,
+  .form-wrap,
+  .svc-title-cell,
+  .svc-body-cell,
+  .values-dual-col,
+  .pillar-large,
+  .commitment-row,
+  .hours,
+  .info-block,
+  .depot-row,
+  .motion-card,
+  .hero-data-strip .data-cell,
+  .hero-trust,
+  .hero-meta-item,
+  .split-panel,
+  [class*="card"],
+  [class*="container"]
+) {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+main :where(
+  .cell,
+  .comply,
+  .value-cell,
+  .svc-card,
+  .pillar,
+  .depot-card,
+  .process-step,
+  .sector,
+  .channel,
+  .hse-item,
+  .vma-block,
+  .govern-row,
+  .svc-feat,
+  .stat,
+  .map-wrap,
+  .legend-card,
+  .hq-info,
+  .contact-card,
+  .form-wrap,
+  .svc-title-cell,
+  .svc-body-cell,
+  .values-dual-col,
+  .pillar-large,
+  .commitment-row,
+  .hours,
+  .info-block,
+  .depot-row,
+  .motion-card,
+  .hero-data-strip .data-cell,
+  .hero-trust,
+  .hero-meta-item,
+  .split-panel,
+  [class*="card"]
+):hover {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+main :where(
+  .cell,
+  .comply,
+  .value-cell,
+  .svc-card,
+  .pillar,
+  .depot-card,
+  .process-step,
+  .sector,
+  .channel,
+  .hse-item,
+  .vma-block,
+  .govern-row,
+  .svc-feat,
+  .stat,
+  .map-wrap,
+  .legend-card,
+  .hq-info,
+  .contact-card,
+  .form-wrap,
+  .svc-title-cell,
+  .svc-body-cell,
+  .values-dual-col,
+  .pillar-large,
+  .commitment-row,
+  .hours,
+  .info-block,
+  .depot-row,
+  .motion-card,
+  .hero-data-strip .data-cell,
+  .hero-trust,
+  .hero-meta-item,
+  .split-panel,
+  [class*="card"]
+)::before,
+main :where(
+  .cell,
+  .comply,
+  .value-cell,
+  .svc-card,
+  .pillar,
+  .depot-card,
+  .process-step,
+  .sector,
+  .channel,
+  .hse-item,
+  .vma-block,
+  .govern-row,
+  .svc-feat,
+  .stat,
+  .map-wrap,
+  .legend-card,
+  .hq-info,
+  .contact-card,
+  .form-wrap,
+  .svc-title-cell,
+  .svc-body-cell,
+  .values-dual-col,
+  .pillar-large,
+  .commitment-row,
+  .hours,
+  .info-block,
+  .depot-row,
+  .motion-card,
+  .hero-data-strip .data-cell,
+  .hero-trust,
+  .hero-meta-item,
+  .split-panel,
+  [class*="card"]
+)::after {
+  border: 0 !important;
+  box-shadow: none !important;
+}

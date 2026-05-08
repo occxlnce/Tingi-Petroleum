@@ -1,298 +1,504 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Request Fuel Supply - Tingi Petroleum</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI1-Outline_wstxcj.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI1-Outline_wstxcj.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI1-Outline_wstxcj.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Tingi Petroleum</title>
+<meta name="description" content="Request a quote for bulk diesel, mobile refueling, tanks & equipment or product testing. Call 0733 511 918 or email nkantingi@yahoo.com. Response within 24 hours.">
+<link rel="stylesheet" href="styles.css">
+<style>
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 50px;
+}
+@media (min-width: 1000px) { .contact-grid { grid-template-columns: 1fr 1.4fr; gap: 70px; } }
+
+/* Info column */
+.info-col h2 em { background: var(--yellow); color: var(--blue); padding: 0 12px; font-style: normal; }
+
+.info-block {
+  border-bottom: 1px solid var(--gray);
+  padding: 28px 0;
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.info-block:first-of-type { border-top: 1px solid var(--gray); }
+.info-block .ic {
+  width: 50px; height: 50px;
+  background: var(--blue);
+  color: var(--yellow);
+  display: grid; place-items: center;
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 700;
+}
+.info-block .lbl {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--yellow-warm);
+  font-weight: 700;
+}
+.info-block .val {
+  margin-top: 8px;
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--blue);
+  line-height: 1.3;
+}
+.info-block .val a {
+  color: inherit;
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s ease;
+}
+.info-block .val a:hover { border-color: var(--yellow-warm); }
+.info-block .sub {
+  margin-top: 4px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--blue);
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+/* Hours table */
+.hours {
+  margin-top: 40px;
+  border: 1px solid var(--gray);
+  border-left: 3px solid rgba(22,29,72,0.2);
+}
+.hours .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--gray);
+  font-family: var(--mono);
+}
+.hours .row:last-child { border-bottom: none; }
+.hours .row .day {
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--blue);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.hours .row .time {
+  text-align: right;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  color: var(--yellow-warm);
+  font-weight: 700;
+}
+.hours .row.emergency { background: var(--blue); }
+.hours .row.emergency .day { color: var(--yellow); }
+.hours .row.emergency .time { color: var(--yellow); }
+
+/* Form */
+.form-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  color: var(--yellow-warm);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.form-wrap h2 {
+  margin: 18px 0 28px;
+  font-family: var(--display);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  color: var(--blue);
+  text-transform: uppercase;
+  line-height: 1;
+}
+.form-wrap h2 em { background: var(--yellow); color: var(--blue); padding: 0 12px; font-style: normal; }
+
+.form-intro {
+  font-size: 15px;
+  color: var(--blue);
+  line-height: 1.7;
+  margin-bottom: 36px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--gray);
+}
+
+#form-status {
+  margin-top: 24px;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  padding: 18px 22px;
+  background: rgba(255,216,0,0.1);
+  border-left: 4px solid var(--yellow-warm);
+  color: var(--blue);
+  min-height: 24px;
+  display: none;
+}
+#form-status:not(:empty) { display: block; }
+#form-status .ok {
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--yellow-warm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Channel cards */
+.channel-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--gray);
+  margin-top: 50px;
+}
+@media (min-width: 800px) { .channel-grid { grid-template-columns: repeat(3, 1fr); } }
+.channel {
+  padding: 40px 32px;
+  background: var(--paper);
+  position: relative;
+  overflow: hidden;
+  border-left: 3px solid transparent;
+  transition: border-left-color .25s ease, padding-left .25s ease;
+}
+.channel:hover {
+  border-left-color: var(--yellow);
+  padding-left: 36px;
+}
+.channel::after {
+  content: "";
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 0; height: 0;
+  border-right: 20px solid var(--gray);
+  border-top: 20px solid transparent;
+}
+.channel .ch-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  font-weight: 700;
+  color: var(--yellow-warm);
+  background: var(--blue);
+  padding: 4px 10px;
+  display: inline-block;
+}
+.channel h4 {
+  margin-top: 22px;
+  font-size: 22px;
+  color: var(--blue);
+}
+.channel p {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--blue);
+  opacity: 0.85;
+}
+.channel .ch-link {
+  margin-top: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--blue);
+  border-bottom: 1px solid var(--yellow-warm);
+  padding-bottom: 4px;
+}
+</style>
+<link rel="stylesheet" href="fluid-editorial-theme.css">
 </head>
-<body class="subpage contact-page">
-  <header class="site-header">
-    <a class="brand" href="index.html" aria-label="Tingi Petroleum home"><img src="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538919/TINGI-Variation-Yelllow_hwsxp3.png" alt="Tingi Petroleum"></a>
-    <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
-    <nav class="site-nav" aria-label="Primary navigation">
-      <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="depots.html">Depots</a><a href="sustainability.html">Sustainability</a>
+<body>
+
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <img src="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538919/TINGI-Variation-Yelllow_hwsxp3.png" alt="Tingi Petroleum Logo" style="height: 42px; width: auto;">
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="depots.html">Depots</a>
+      <a href="sustainability.html">Sustainability</a>
+      <a href="contact.html">Contact</a>
     </nav>
-    <a class="btn btn-small" href="contact.html">Request Supply</a>
-  </header>
-  <main>
-    <!-- OPERATIONAL HERO SECTION -->
-    <section class="fuel-request-hero">
-      <div class="hero-dramatic">
-        <h1 class="hero-massive">REQUEST<br>FUEL<br>SUPPLY.</h1>
-        <p class="hero-supporting">Our team is ready to coordinate reliable fuel delivery for industrial, commercial, logistics, and agricultural operations.</p>
-        <div class="hero-metrics">
-          <div><strong>24/7</strong><span>Emergency Dispatch</span></div>
-          <div><strong>7</strong><span>National Depots</span></div>
-          <div><strong>50ppm</strong><span>Premium Diesel</span></div>
-        </div>
-      </div>
-    </section>
+    <a href="contact.html" class="nav-cta">Get a Quote <span class="arrow">→</span></a>
+    <button class="nav-toggle"><span></span><span></span><span></span></button>
+  </div>
+</header>
 
-    <!-- EMERGENCY SUPPLY BANNER -->
-    <section class="emergency-banner">
-      <div class="emergency-content">
-        <div class="emergency-badge">
-          <span class="pulse-dot"></span>
-          <span class="badge-text">24/7 EMERGENCY</span>
-        </div>
-        <div class="emergency-text">
-          <h2>Emergency Fuel Supply Available</h2>
-          <p>Rapid dispatch support for urgent operational, generator, fleet, and industrial fuel requirements.</p>
-        </div>
-        <a class="btn btn-emergency" href="tel:+27733511918">
-          <span class="emergency-icon"><i class="fas fa-siren"></i></span>
-          Call Emergency Supply
-        </a>
-      </div>
-    </section>
+<main>
 
-    <!-- TRUST METRICS SECTION -->
-    <section class="trust-metrics">
-      <div class="section-header">
-        <p class="eyebrow">Why Operations Choose Tingi</p>
-        <h2>Industrial Fuel Supply Excellence</h2>
-      </div>
-      <div class="trust-grid">
-        <article class="trust-item">
-          <div class="trust-icon nationwide-icon"></div>
-          <h3>Nationwide Delivery</h3>
-          <p>7 strategic depots across South Africa ensuring reliable fuel distribution.</p>
-        </article>
-        <article class="trust-item">
-          <div class="trust-icon hse-icon"></div>
-          <h3>HSE-Compliant Handling</h3>
-          <p>Health, Safety, and Environmental protocols integrated into every delivery.</p>
-        </article>
-        <article class="trust-item">
-          <div class="trust-icon fuel-icon"></div>
-          <h3>Premium 50ppm Diesel</h3>
-          <p>Clean fuel quality meeting the highest industry standards.</p>
-        </article>
-        <article class="trust-item">
-          <div class="trust-icon emergency-icon"></div>
-          <h3>Emergency Dispatch</h3>
-          <p>Rapid response fuel delivery for critical operational requirements.</p>
-        </article>
-        <article class="trust-item">
-          <div class="trust-icon testing-icon"></div>
-          <h3>On-site Testing</h3>
-          <p>Quality verification and documentation provided with every delivery.</p>
-        </article>
-        <article class="trust-item">
-          <div class="trust-icon contract-icon"></div>
-          <h3>Long-term Contracts</h3>
-          <p>Guaranteed supply agreements for continuous operations.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- MAIN REQUEST SECTION -->
-    <section class="fuel-request-section">
-      <div class="request-layout">
-        <!-- LEFT SIDE: OPERATIONAL MESSAGING -->
-        <div class="operational-messaging">
-          <div class="messaging-header">
-            <p class="eyebrow">Ready to Schedule Delivery?</p>
-            <h2>Start Your Fuel Request</h2>
-          </div>
-          <div class="messaging-content">
-            <p>Request bulk diesel supply, mobile refueling, or infrastructure support through our nationwide network. Our dispatch team coordinates fuel delivery from the nearest depot to your location.</p>
-            
-            <div class="direct-contact">
-              <h3>Immediate Dispatch Lines</h3>
-              <div class="contact-lines">
-                <a href="tel:+27615135684" class="dispatch-line">
-                  <span class="line-label">Main Dispatch</span>
-                  <span class="line-number">0615 135 684</span>
-                </a>
-                <a href="tel:+27733511918" class="dispatch-line emergency-line">
-                  <span class="line-label">Emergency Supply</span>
-                  <span class="line-number">0733 511 918</span>
-                </a>
-              </div>
-            </div>
-            
-            <div class="coverage-reminder">
-              <h3>Serving Operations Across South Africa</h3>
-              <div class="depot-list">
-                <span>Midrand</span>
-                <span>Cape Town</span>
-                <span>Bloemfontein</span>
-                <span>Mpumalanga</span>
-                <span>Bapong</span>
-                <span>Pietermaritzburg</span>
-                <span>Makhado</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- RIGHT SIDE: PREMIUM FORM CARD -->
-        <div class="premium-form-card">
-          <div class="form-header">
-            <h3>Fuel Supply Request Form</h3>
-            <p>Complete for immediate dispatch coordination</p>
-          </div>
-          <form class="industrial-form" action="mailto:nkantingi@yahoo.com" method="post" enctype="text/plain">
-            <div class="form-row">
-              <label>Full Name<input type="text" name="Full Name" required></label>
-              <label>Company<input type="text" name="Company" required></label>
-            </div>
-            
-            <div class="form-row">
-              <label>Email Address<input type="email" name="Email" required></label>
-              <label>Phone Number<input type="tel" name="Phone" required></label>
-            </div>
-            
-            <div class="form-row">
-              <label>Fuel Volume Required<input type="text" name="Fuel Volume" placeholder="e.g., 5000 litres" required></label>
-              <label>Delivery Location<input type="text" name="Delivery Location" required></label>
-            </div>
-            
-            <div class="form-row">
-              <label>Delivery Date<input type="date" name="Delivery Date" required></label>
-              <label>Industry Type<select name="Industry Type" required>
-                <option value="">Select Industry</option>
-                <option value="mining">Mining</option>
-                <option value="logistics">Logistics & Transport</option>
-                <option value="agriculture">Agriculture</option>
-                <option value="construction">Construction</option>
-                <option value="manufacturing">Manufacturing</option>
-                <option value="commercial">Commercial</option>
-                <option value="other">Other</option>
-              </select></label>
-            </div>
-            
-            <div class="form-row">
-              <label>Service Required<select name="Service Required" required>
-                <option value="">Select Service</option>
-                <option value="bulk-diesel">Bulk Diesel - 50ppm</option>
-                <option value="mobile-refueling">Mobile Refueling</option>
-                <option value="tanks-equipment">Tanks & Equipment</option>
-                <option value="product-testing">Product Testing</option>
-                <option value="infrastructure">Infrastructure Support</option>
-              </select></label>
-            </div>
-            
-            <div class="form-row checkbox-row">
-              <label class="checkbox-label">
-                <input type="checkbox" name="Ongoing Supply">
-                <span class="checkmark"></span>
-                <span class="label-text">Ongoing Supply Required</span>
-              </label>
-              <label class="checkbox-label">
-                <input type="checkbox" name="Emergency Request">
-                <span class="checkmark"></span>
-                <span class="label-text">Emergency Request</span>
-              </label>
-            </div>
-            
-            <label class="full-width">Additional Requirements<textarea name="Message" rows="4" placeholder="Describe specific requirements, access details, special handling needs, or timing preferences."></textarea></label>
-            
-            <button class="btn btn-industrial" type="submit">
-              <span class="btn-icon">🚚</span>
-              Request Fuel Supply
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- SUPPLY PROCESS TIMELINE -->
-    <section class="supply-process">
-      <div class="section-header">
-        <p class="eyebrow">How Supply Requests Work</p>
-        <h2>Industrial Fuel Delivery Process</h2>
-      </div>
-      <div class="process-timeline">
-        <div class="process-step">
-          <div class="step-number">01</div>
-          <div class="step-content">
-            <h3>Submit Request</h3>
-            <p>Complete fuel requirements, volume, location, and delivery preferences for optimal depot routing.</p>
-          </div>
-        </div>
-        <div class="process-arrow">→</div>
-        <div class="process-step">
-          <div class="step-number">02</div>
-          <div class="step-content">
-            <h3>Confirm Volume & Timing</h3>
-            <p>Dispatch team confirms availability from nearest depot and schedules delivery window.</p>
-          </div>
-        </div>
-        <div class="process-arrow">→</div>
-        <div class="process-step">
-          <div class="step-number">03</div>
-          <div class="step-content">
-            <h3>Route From Nearest Depot</h3>
-            <p>System identifies optimal depot and calculates efficient delivery route to your location.</p>
-          </div>
-        </div>
-        <div class="process-arrow">→</div>
-        <div class="process-step">
-          <div class="step-number">04</div>
-          <div class="step-content">
-            <h3>Dispatch Delivery Unit</h3>
-            <p>HSE-compliant tanker dispatched with quality verification protocols and safety procedures.</p>
-          </div>
-        </div>
-        <div class="process-arrow">→</div>
-        <div class="process-step">
-          <div class="step-number">05</div>
-          <div class="step-content">
-            <h3>Verify Fuel On-site</h3>
-            <p>Professional fuel transfer with on-site testing and documentation before acceptance.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- OPERATIONAL SUPPORT HOURS -->
-    <section class="operational-support">
-      <div class="section-header">
-        <p class="eyebrow">Operational Support Hours</p>
-        <h2>Industrial Fuel Supply Coordination</h2>
-      </div>
-      <div class="support-grid">
-        <article class="support-item">
-          <div class="support-icon dispatch-icon"></div>
-          <h3>Dispatch Coordination</h3>
-          <p><strong>Monday - Friday:</strong> 06:00 - 18:00<br><strong>Saturday:</strong> 07:00 - 14:00</p>
-        </article>
-        <article class="support-item">
-          <div class="support-icon quote-icon"></div>
-          <h3>Quote Processing</h3>
-          <p><strong>Business Hours:</strong> Immediate response<br><strong>After Hours:</strong> Next business day</p>
-        </article>
-        <article class="support-item">
-          <div class="support-icon emergency-icon"></div>
-          <h3>Emergency Line</h3>
-          <p><strong>24/7 Availability:</strong> Rapid dispatch for urgent operational requirements</p>
-        </article>
-      </div>
-    </section>
-  </main>
-  <footer class="site-footer">
-    <div class="footer-top">
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-grid">
       <div>
-        <img src="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI1-Outline_wstxcj.png" alt="Tingi Petroleum">
-        <p>South Africa's leading clean fuel provider. We supply more than just fuel - sustainability is our core value.</p>
-        <p><a href="tel:+27733511918">0733 511 918</a><br><a href="mailto:nkantingi@yahoo.com">nkantingi@yahoo.com</a></p>
+        <span class="eyebrow"><span class="dot"></span>Get In Touch</span>
+        <h1 style="margin-top: 22px;">Contact us,<br>and <em>get pumped.</em></h1>
+        <p class="lede">Ready to order bulk diesel, schedule mobile refueling, or discuss a long-term supply contract? Tingi Petroleum's team is standing by — countrywide.</p>
+
+        <div class="hero-meta">
+          <div class="hero-meta-item"><div class="lbl">Response</div><div class="val">WITHIN 24H</div></div>
+          <div class="hero-meta-item"><div class="lbl">Emergency</div><div class="val">24 / 7 SUPPLY</div></div>
+          <div class="hero-meta-item"><div class="lbl">Coverage</div><div class="val">COUNTRYWIDE</div></div>
+        </div>
       </div>
-      <nav class="footer-nav" aria-label="Footer navigation">
-        <div><h3>Company</h3><a href="about.html">About Us</a><a href="sustainability.html">Our Vision</a><a href="about.html#compliance">Compliance</a></div>
-        <div><h3>Services</h3><a href="services.html#bulk">Bulk Diesel</a><a href="services.html#mobile">Mobile Refueling</a><a href="services.html#equipment">Tanks & Equipment</a></div>
-        <div><h3>Depots</h3><a href="depots.html#midrand">Midrand</a><a href="depots.html#cape-town">Cape Town</a><a href="depots.html#makhado">Makhado</a></div>
-        <div><h3>Connect</h3><a href="tel:+27733511918">0733 511 918</a><a href="mailto:nkantingi@yahoo.com">nkantingi@yahoo.com</a><a href="contact.html">Get A Quote</a></div>
-      </nav>
     </div>
-    <div class="footer-bottom"><span>© 2025 Tingi Financial Services (Pty) Ltd. Trading as Tingi Petroleum Services.</span><span class="status-dot">Countrywide Supply Active</span></div>
-  </footer>
-  <script src="js/main.js"></script>
+  </div>
+</section>
+
+
+<!-- ============= MAIN CONTACT ============= -->
+<section>
+  <div class="container">
+    <div class="contact-grid reveal">
+
+      <!-- LEFT: INFO -->
+      <div class="info-col">
+        <span class="eyebrow dark"><span class="dot"></span>Direct Lines</span>
+        <h2 style="margin-top: 22px;">Speak<br>directly.</h2>
+        <p style="margin-top: 22px; font-size: 16px; line-height: 1.7; color: var(--blue);">
+          Every enquiry reaches the team that dispatches your fuel. Phone is fastest for urgent supply matters. Email works for quotes, contracts and supporting documents.
+        </p>
+
+        <div style="margin-top: 40px;">
+
+          <div class="info-block">
+            <div class="ic">@</div>
+            <div>
+              <div class="lbl">Email</div>
+              <div class="val"><a href="mailto:nkantingi@yahoo.com">nkantingi@yahoo.com</a></div>
+              <div class="sub">RESPONSE WITHIN 24H</div>
+            </div>
+          </div>
+
+          <div class="info-block">
+            <div class="ic">☎</div>
+            <div>
+              <div class="lbl">Phone</div>
+              <div class="val">
+                <a href="tel:+27615135684">0615 135 684</a><br>
+                <a href="tel:+27733511918">0733 511 918</a>
+              </div>
+              <div class="sub">PRIMARY · SECONDARY</div>
+            </div>
+          </div>
+
+          <div class="info-block">
+            <div class="ic">⌖</div>
+            <div>
+              <div class="lbl">Head Office</div>
+              <div class="val">546 16th Road, Randjespark<br>Midrand, 1685</div>
+              <div class="sub">CONSTANTIA BUSINESS PARK · GAUTENG</div>
+            </div>
+          </div>
+
+          <div class="info-block">
+            <div class="ic">⌥</div>
+            <div>
+              <div class="lbl">Web</div>
+              <div class="val"><a href="#">www.tingipetroleum.co.za</a></div>
+              <div class="sub">FOR DOCUMENTS &amp; ASSETS</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Hours -->
+        <div class="hours">
+          <div class="row">
+            <span class="day">Mon – Fri</span>
+            <span class="time">07:00 – 17:00</span>
+          </div>
+          <div class="row">
+            <span class="day">Saturday</span>
+            <span class="time">08:00 – 13:00</span>
+          </div>
+          <div class="row emergency">
+            <span class="day">Emergency Supply</span>
+            <span class="time">24 / 7 ACTIVE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: FORM -->
+      <div class="form-wrap">
+        <span class="form-eyebrow">/ QUOTE REQUEST</span>
+        <h2>Request<br>a <em>quote.</em></h2>
+        <p class="form-intro">
+          Tell us your fuel requirement, volume, delivery location and timing — we'll respond within 24 hours with pricing and the nearest active depot.
+        </p>
+
+        <form id="quote-form">
+
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="field">
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="service">Service Required</label>
+              <select id="service" name="service" required>
+                <option value="">Select…</option>
+                <option>Bulk Diesel — 50ppm</option>
+                <option>Mobile Refueling</option>
+                <option>Tanks &amp; Equipment</option>
+                <option>Product Testing</option>
+                <option>Long-Term Supply Contract</option>
+                <option>Other Enquiry</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="location">Delivery Location</label>
+              <input type="text" id="location" name="location" placeholder="City / Province / Site">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="message">Message — Volume, timing &amp; requirements</label>
+            <textarea id="message" name="message" placeholder="Briefly describe your fuel requirements: volume (litres), frequency, delivery location, any specific operational notes."></textarea>
+          </div>
+
+          <div style="margin-top: 32px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+            <button type="submit" class="btn btn-yellow">Send Enquiry <span class="arrow">→</span></button>
+            <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; color: var(--blue); opacity: 0.7; text-transform: uppercase;">▮ RESPONSE WITHIN 24H</span>
+          </div>
+
+          <div id="form-status"></div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============= CHANNELS ============= -->
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow dark"><span class="dot"></span>How Most Clients Reach Us</span>
+      <h2>Three<br><em>channels.</em></h2>
+      <p class="lede">Pick whichever suits the urgency and the topic — every channel routes to the same team.</p>
+    </div>
+
+    <div class="channel-grid reveal">
+      <div class="channel">
+        <span class="ch-num">/ 01</span>
+        <h4>Phone — Urgent Supply</h4>
+        <p>For deadline-driven matters — emergency refueling, time-critical bulk orders, on-site dispatch issues — call directly.</p>
+        <a class="ch-link" href="tel:+27733511918">☎ 0733 511 918 →</a>
+      </div>
+      <div class="channel">
+        <span class="ch-num">/ 02</span>
+        <h4>Email — Quotes &amp; Contracts</h4>
+        <p>Best for quote requests, supply contract terms, supporting documentation and procurement workflows.</p>
+        <a class="ch-link" href="mailto:nkantingi@yahoo.com">@ nkantingi@yahoo.com →</a>
+      </div>
+      <div class="channel">
+        <span class="ch-num">/ 03</span>
+        <h4>Form — New Enquiries</h4>
+        <p>For first-time enquiries with full requirement detail. Submit the form above and we'll route to the right team.</p>
+        <a class="ch-link" href="#quote-form">Quote Request →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="name">TINGI</div>
+          <div class="sub">PETROLEUM</div>
+          <p>South Africa's leading clean fuel provider. We supply more than just fuel — sustainability is our core value.</p>
+          <div style="margin-top: 22px; display: flex; flex-direction: column; gap: 6px; font-family: var(--mono); font-size: 13px;">
+            <a href="tel:+27733511918" style="color: var(--yellow);">☎ 0733 511 918</a>
+            <a href="mailto:nkantingi@yahoo.com" style="color: rgba(242,242,242,0.78);">@ nkantingi@yahoo.com</a>
+          </div>
+        </div>
+        <div class="footer-col"><h5>Company</h5><ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="about.html#mission">Our Mission</a></li>
+          <li><a href="about.html#vision">Our Vision</a></li>
+          <li><a href="about.html#values">Our Values</a></li>
+          <li><a href="about.html#compliance">Compliance</a></li>
+        </ul></div>
+        <div class="footer-col"><h5>Services</h5><ul>
+          <li><a href="services.html">Bulk Diesel</a></li>
+          <li><a href="services.html">Mobile Refueling</a></li>
+          <li><a href="services.html">Tanks &amp; Equipment</a></li>
+          <li><a href="services.html">Product Testing</a></li>
+          <li><a href="contact.html">Get a Quote</a></li>
+        </ul></div>
+        <div class="footer-col"><h5>Depots</h5><ul>
+          <li><a href="depots.html">Midrand (HQ)</a></li>
+          <li><a href="depots.html">Cape Town</a></li>
+          <li><a href="depots.html">Bloemfontein</a></li>
+          <li><a href="depots.html">Mpumalanga</a></li>
+          <li><a href="depots.html">More Locations</a></li>
+        </ul></div>
+        <div class="footer-col"><h5>Sustainability</h5><ul>
+          <li><a href="sustainability.html">Clean Fuel Vision</a></li>
+          <li><a href="sustainability.html">Low-Carbon Economy</a></li>
+          <li><a href="sustainability.html">Job Creation</a></li>
+          <li><a href="sustainability.html">Energy Poverty</a></li>
+          <li><a href="sustainability.html">ESG Commitment</a></li>
+        </ul></div>
+      </div>
+      <div style="margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,216,0,0.16); display: flex; gap: 14px; flex-wrap: wrap;">
+        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.7); text-transform: uppercase; padding: 6px 12px; border: 1px solid rgba(255,216,0,0.3);">CIPC REGISTERED</span>
+        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.7); text-transform: uppercase; padding: 6px 12px; border: 1px solid rgba(255,216,0,0.3);">B-BBEE LEVEL 1</span>
+        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.7); text-transform: uppercase; padding: 6px 12px; border: 1px solid rgba(255,216,0,0.3);">HSE COMPLIANT</span>
+        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.7); text-transform: uppercase; padding: 6px 12px; border: 1px solid rgba(255,216,0,0.3);">COIDA</span>
+        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.7); text-transform: uppercase; padding: 6px 12px; border: 1px solid rgba(255,216,0,0.3);">UIF</span>
+        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.7); text-transform: uppercase; padding: 6px 12px; border: 1px solid rgba(255,216,0,0.3);">SARS</span>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© 2026 Tingi Financial Services (Pty) Ltd · Trading as Tingi Petroleum Services</span>
+      <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: rgba(242,242,242,0.5);">Website by Occxlnce</span>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
 </body>
 </html>
