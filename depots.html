@@ -1,1132 +1,425 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Depots — Tingi Petroleum</title>
-<meta name="description" content="7 strategically located depots across South Africa — Midrand HQ, Cape Town, Bloemfontein, Mpumalanga, Bapong, Pietermaritzburg, Makhado.">
-<link rel="stylesheet" href="styles.css">
-<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/map.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-<style>
-/* Map + depots layout */
-.map-section {
-  background: var(--blue);
-  color: var(--white);
-  padding: clamp(70px, 9vw, 120px) 0;
-  position: relative;
-  overflow: hidden;
-}
-/* Concentric circles — Constructivist background */
-.map-section::before {
-  content: "";
-  position: absolute;
-  left: -120px; top: 50%;
-  transform: translateY(-50%);
-  width: 500px; height: 500px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,216,0,0.05);
-  pointer-events: none;
-}
-.map-section .container { position: relative; z-index: 2; }
-
-.map-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 60px;
-  align-items: start;
-}
-@media (min-width: 1100px) { .map-grid { grid-template-columns: 1.2fr 1fr; gap: 70px; } }
-
-/* Map wrap — minimal, no heavy box */
-.map-wrap {
-  position: relative;
-  background: var(--blue-deep);
-  padding: 30px;
-  aspect-ratio: 1.1/1;
-  border-left: 3px solid rgba(255,216,0,0.3);
-}
-.map-wrap::before {
-  content: "TINGI / SA-NETWORK";
-  position: absolute;
-  top: 0; left: 3px;
-  background: var(--blue);
-  color: rgba(255,216,0,0.6);
-  padding: 4px 12px;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  z-index: 2;
-}
-.map-wrap::after {
-  content: "07 / 07 ACTIVE";
-  position: absolute;
-  bottom: 0; right: 0;
-  background: var(--yellow);
-  color: var(--blue);
-  padding: 4px 12px;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  font-weight: 700;
-  clip-path: polygon(8px 0%, 100% 0%, 100% 100%, 0% 100%);
-  z-index: 2;
-}
-.sa-map { width: 100%; height: 100%; }
-.sa-map .country { fill: rgba(255,216,0,0.05); stroke: rgba(255,216,0,0.3); stroke-width: 1.5; }
-.sa-map .grid-line { stroke: rgba(255,216,0,0.06); stroke-width: 0.5; stroke-dasharray: 4 4; }
-.sa-map .pin-ring { fill: none; stroke: var(--yellow); stroke-width: 1.5; opacity: 0.4; }
-.sa-map .pin-dot { fill: var(--yellow); }
-.sa-map .pin-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; fill: var(--yellow); text-transform: uppercase; font-weight: 600; }
-.sa-map .pin-num { font-family: 'Arimo', sans-serif; font-size: 13px; fill: var(--blue); font-weight: 700; text-anchor: middle; dominant-baseline: central; }
-.sa-map .pin-bg { fill: var(--yellow); }
-@keyframes pinpulse {
-  0%, 100% { transform: scale(1); opacity: 0.4; }
-  50% { transform: scale(1.4); opacity: 0; }
-}
-.sa-map .pin-pulse { fill: none; stroke: var(--yellow); stroke-width: 1; transform-origin: center; transform-box: fill-box; animation: pinpulse 2s ease-out infinite; }
-
-.legend-side h2 em { color: var(--yellow); font-style: normal; }
-.legend-side h2 { color: var(--white); margin: 22px 0 24px; }
-.legend-side .lede { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.7); }
-.legend-side .legend-stats {
-  margin-top: 36px;
-  padding-top: 24px;
-  border-top: 1px solid rgba(255,216,0,0.2);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  font-family: var(--mono);
-}
-.legend-side .legend-stats .lk { font-size: 10px; letter-spacing: 0.22em; color: rgba(255,216,0,0.55); }
-.legend-side .legend-stats .lv {
-  margin-top: 6px;
-  font-family: var(--display);
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--white);
-  letter-spacing: -0.02em;
-}
-
-/* Depot cards — clean, left-accent */
-.depot-cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1px;
-  background: var(--gray);
-}
-@media (min-width: 700px) { .depot-cards { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1100px) { .depot-cards { grid-template-columns: repeat(3, 1fr); } }
-
-.depot-card {
-  position: relative;
-  background: var(--white);
-  padding: 0;
-  overflow: hidden;
-  border-left: 3px solid transparent;
-  transition: border-left-color .3s ease;
-}
-.depot-card:hover { border-left-color: var(--yellow); }
-
-/* Corner triangle — Constructivist */
-.depot-card::after {
-  content: "";
-  position: absolute;
-  top: 0; right: 0;
-  width: 0; height: 0;
-  border-right: 24px solid var(--yellow);
-  border-bottom: 24px solid transparent;
-  opacity: 0;
-  transition: opacity .3s ease;
-}
-.depot-card:hover::after { opacity: 0.6; }
-
-.depot-card .head {
-  background: var(--blue);
-  color: var(--yellow);
-  padding: 14px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-.depot-card .head .badge {
-  background: var(--yellow);
-  color: var(--blue);
-  padding: 3px 10px;
-  font-size: 10px;
-  clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
-}
-
-.depot-card .body { padding: 28px 26px; }
-.depot-card .body .num {
-  font-family: var(--display);
-  font-size: 52px;
-  line-height: 1;
-  font-weight: 700;
-  color: var(--yellow);
-  letter-spacing: -0.03em;
-  opacity: 0.3;
-}
-.depot-card .body h3 {
-  margin-top: 10px;
-  font-family: var(--display);
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--blue);
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-}
-.depot-card .body .province {
-  margin-top: 5px;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  color: var(--blue);
-  opacity: 0.55;
-  text-transform: uppercase;
-}
-.depot-card .body .desc {
-  margin-top: 16px;
-  font-size: 13.5px;
-  line-height: 1.7;
-  color: var(--blue);
-  opacity: 0.78;
-}
-.depot-card .foot {
-  padding: 12px 24px;
-  border-top: 1px solid var(--gray);
-  background: var(--paper);
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  color: var(--blue);
-  text-transform: uppercase;
-  opacity: 0.7;
-}
-.depot-card .foot .status { color: var(--yellow-warm); font-weight: 700; opacity: 1; }
-
-/* Coverage promise — diagonal clip */
-.promise {
-  background: var(--yellow);
-  color: var(--blue);
-  position: relative;
-  overflow: hidden;
-  clip-path: polygon(0 24px, 100% 0, 100% calc(100% - 24px), 0 100%);
-  padding: 100px 0;
-}
-/* Large circle decoration */
-.promise::before {
-  content: "";
-  position: absolute;
-  right: -80px; top: 50%;
-  transform: translateY(-50%);
-  width: 380px; height: 380px;
-  border-radius: 50%;
-  border: 1px solid rgba(0,51,102,0.1);
-  pointer-events: none;
-}
-.promise .container {
-  padding: clamp(40px, 6vw, 80px) var(--gutter);
-  text-align: left;
-  max-width: 900px;
-}
-.promise .badge {
-  display: inline-block;
-  background: var(--blue);
-  color: var(--yellow);
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.28em;
-  padding: 7px 16px;
-  font-weight: 700;
-  margin-bottom: 28px;
-  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 8px 100%);
-}
-.promise h2 {
-  font-family: var(--display);
-  font-size: clamp(36px, 5.5vw, 72px);
-  font-weight: 700;
-  color: var(--blue);
-  text-transform: uppercase;
-  line-height: 0.95;
-}
-.promise p {
-  margin-top: 24px;
-  font-size: 17px;
-  line-height: 1.7;
-  max-width: 600px;
-  color: rgba(0,51,102,0.8);
-}
-
-/* HQ block */
-.hq-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-  background: var(--gray);
-}
-@media (min-width: 900px) { .hq-grid { grid-template-columns: 1fr 1.4fr; } }
-
-.hq-visual {
-  background: var(--blue);
-  color: var(--yellow);
-  padding: 60px 40px;
-  position: relative;
-  overflow: hidden;
-  min-height: 380px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-/* Constructivist circle in HQ visual */
-.hq-visual::before {
-  content: "";
-  position: absolute;
-  right: -80px; top: 50%;
-  transform: translateY(-50%);
-  width: 300px; height: 300px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,216,0,0.1);
-  pointer-events: none;
-}
-/* Corner triangle */
-.hq-visual::after {
-  content: "TINGI / HQ-01 / GP";
-  position: absolute;
-  top: 20px; right: 20px;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  color: rgba(255,216,0,0.5);
-}
-.hq-visual .label {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.32em;
-  color: rgba(255,216,0,0.55);
-  text-transform: uppercase;
-}
-.hq-visual .city {
-  margin-top: 12px;
-  font-family: var(--display);
-  font-size: clamp(52px, 7.5vw, 88px);
-  font-weight: 700;
-  line-height: 0.95;
-  color: var(--white);
-  text-transform: uppercase;
-  letter-spacing: -0.025em;
-}
-.hq-visual .country {
-  margin-top: 10px;
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  color: rgba(255,216,0,0.6);
-}
-.hq-visual .coords {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  color: rgba(255,216,0,0.5);
-  border-top: 1px solid rgba(255,216,0,0.15);
-  padding-top: 20px;
-}
-.hq-visual .coords span { display: block; margin-top: 4px; color: rgba(255,255,255,0.75); font-size: 13px; }
-
-.hq-info { padding: 50px 46px; background: var(--white); }
-.hq-info h3 {
-  font-family: var(--display);
-  font-size: 30px;
-  font-weight: 700;
-  color: var(--blue);
-  text-transform: uppercase;
-  letter-spacing: -0.005em;
-}
-.hq-info .row {
-  display: grid;
-  grid-template-columns: 130px 1fr;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--gray);
-  align-items: start;
-}
-.hq-info .row .k {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  color: var(--blue);
-  opacity: 0.5;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-.hq-info .row .v {
-  font-family: var(--display);
-  font-size: 16px;
-  color: var(--blue);
-  font-weight: 600;
-  line-height: 1.5;
-}
-.hq-info .row .v a { color: var(--yellow-warm); border-bottom: 1px solid transparent; transition: border-color .2s; }
-.hq-info .row .v a:hover { border-color: var(--yellow-warm); }
-
-/* Globe depot map */
-.depot-globe-section {
-  min-height: 100vh;
-  padding: 0;
-  background: var(--light-page);
-  overflow: hidden;
-}
-
-.depot-globe-shell {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  align-items: stretch;
-}
-
-@media (min-width: 1050px) {
-  .depot-globe-shell {
-    grid-template-columns: minmax(320px, 0.38fr) minmax(0, 0.62fr);
-  }
-}
-
-.depot-globe-copy {
-  padding: clamp(72px, 9vw, 130px) var(--gutter);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: var(--yellow);
-  color: var(--blue);
-}
-
-.depot-globe-copy .eyebrow,
-.depot-globe-copy h2,
-.depot-globe-copy p,
-.depot-globe-copy .lk,
-.depot-globe-copy .lv {
-  color: var(--blue) !important;
-}
-
-.depot-globe-copy h2 {
-  margin-top: 24px;
-  font-size: clamp(44px, 6vw, 86px);
-  line-height: .98;
-  font-weight: 300;
-}
-
-.depot-globe-copy p {
-  max-width: 560px;
-  margin-top: 28px;
-  color: var(--body-ink) !important;
-}
-
-.depot-globe-stats {
-  margin-top: 44px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px;
-}
-
-.depot-globe-stats .lk {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .08em;
-}
-
-.depot-globe-stats .lv {
-  margin-top: 4px;
-  font-family: var(--display);
-  font-size: clamp(30px, 4vw, 54px);
-  font-weight: 300;
-  line-height: 1;
-}
-
-.depot-globe-map {
-  position: relative;
-  min-height: 72vh;
-  background: var(--blue);
-}
-
-#chartdiv {
-  width: 100%;
-  height: 100%;
-  min-height: 72vh;
-  background: var(--blue);
-}
-
-.map-section {
-  display: none !important;
-}
-
-.depot-map-fallback {
-  position: absolute;
-  left: 24px;
-  right: 24px;
-  bottom: 24px;
-  z-index: 2;
-  color: var(--yellow);
-  font-size: 13px;
-  letter-spacing: .04em;
-  pointer-events: none;
-}
-
-@media (max-width: 700px) {
-  .depot-globe-copy {
-    padding-top: 96px;
-  }
-
-  .depot-globe-map,
-  #chartdiv {
-    min-height: 64vh;
-  }
-}
-</style>
-<link rel="stylesheet" href="fluid-editorial-theme.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Depots - Tingi Petroleum</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/cookie-consent.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI1-Outline_wstxcj.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI1-Outline_wstxcj.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI1-Outline_wstxcj.png">
 </head>
-<body>
-
-<header class="site-header">
-  <div class="nav-inner">
-    <a href="index.html" class="brand">
-      <img src="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538919/TINGI-Variation-Yelllow_hwsxp3.png" alt="Tingi Petroleum Logo" style="height: 42px; width: auto;">
-    </a>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="services.html">Services</a>
-      <a href="depots.html">Depots</a>
-      <a href="sustainability.html">Sustainability</a>
-      <a href="contact.html">Contact</a>
+<body class="subpage depots-page">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Tingi Petroleum home"><img src="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538919/TINGI-Variation-Yelllow_hwsxp3.png" alt="Tingi Petroleum"></a>
+    <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a class="is-active" href="depots.html">Depots</a><a href="sustainability.html">Sustainability</a>
     </nav>
-    <a href="contact.html" class="nav-cta">Get a Quote <span class="arrow">→</span></a>
-    <button class="nav-toggle"><span></span><span></span><span></span></button>
-  </div>
-</header>
-
-<main>
-
-<section class="page-hero">
-  <div class="container">
-    <div class="page-hero-grid">
-      <div>
-        <span class="eyebrow"><span class="dot"></span>National Footprint</span>
-        <h1 style="margin-top: 22px;">Our<br><em>depots.</em></h1>
-        <p class="lede">7 strategically located depots across South Africa — from Midrand HQ to Makhado in Limpopo. Wherever you operate, the nearest depot dispatches your bulk diesel to site.</p>
-
-        <div class="hero-meta">
-          <div class="hero-meta-item"><div class="lbl">Depots</div><div class="val">07 NATIONAL</div></div>
-          <div class="hero-meta-item"><div class="lbl">Provinces</div><div class="val">07 COVERED</div></div>
-          <div class="hero-meta-item"><div class="lbl">HQ</div><div class="val">MIDRAND</div></div>
-          <div class="hero-meta-item"><div class="lbl">Reach</div><div class="val">COUNTRYWIDE</div></div>
+    <a class="btn btn-small" href="contact.html">Get A Quote</a>
+  </header>
+  <main>
+    <section class="page-hero depots-hero">
+      <div class="hero-dramatic">
+        <h1 class="hero-massive">NATIONAL<br>FUEL<br>NETWORK.</h1>
+        <p class="hero-supporting">Strategically positioned depot infrastructure supporting reliable bulk diesel delivery across South Africa.</p>
+        <div class="hero-metrics">
+          <div><strong>7</strong><span>Active Depots</span></div>
+          <div><strong>24/7</strong><span>Dispatch</span></div>
+          <div><strong>100%</strong><span>Coverage</span></div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ============= INTERACTIVE GLOBE ============= -->
-<section class="depot-globe-section">
-  <div class="depot-globe-shell">
-    <div class="depot-globe-copy reveal">
-      <span class="eyebrow"><span class="dot"></span>Tactical Network</span>
-      <h2>One country.<br>Seven depots.</h2>
-      <p>Rotate the globe or switch to map view to see Tingi Petroleum's active depot network across South Africa. Every location supports countrywide 50ppm diesel dispatch, regional coverage, and site delivery planning.</p>
-
-      <div class="depot-globe-stats">
-        <div><div class="lk">DEPOTS</div><div class="lv">07</div></div>
-        <div><div class="lk">HQ</div><div class="lv">Midrand</div></div>
-        <div><div class="lk">PRODUCT</div><div class="lv">50ppm</div></div>
-        <div><div class="lk">REACH</div><div class="lv">SA</div></div>
-      </div>
-
-      <div style="margin-top: 42px; display: flex; gap: 14px; flex-wrap: wrap;">
-        <a href="contact.html" class="btn btn-blue">Request Delivery <span class="arrow">â†’</span></a>
-      </div>
-    </div>
-
-    <div class="depot-globe-map reveal">
-      <div id="chartdiv" aria-label="Interactive globe map showing Tingi Petroleum depot locations"></div>
-      <div class="depot-map-fallback">TINGI PETROLEUM / DEPOT LOCATIONS / GLOBE + MAP</div>
-    </div>
-  </div>
-</section>
-
-<!-- ============= MAP ============= -->
-<section class="map-section">
-  <div class="container">
-    <div class="map-grid">
-
-      <div class="map-wrap reveal">
-        <svg class="sa-map" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-          <line class="grid-line" x1="0" y1="100" x2="600" y2="100"/>
-          <line class="grid-line" x1="0" y1="200" x2="600" y2="200"/>
-          <line class="grid-line" x1="0" y1="300" x2="600" y2="300"/>
-          <line class="grid-line" x1="0" y1="400" x2="600" y2="400"/>
-          <line class="grid-line" x1="0" y1="500" x2="600" y2="500"/>
-          <line class="grid-line" x1="100" y1="0" x2="100" y2="600"/>
-          <line class="grid-line" x1="200" y1="0" x2="200" y2="600"/>
-          <line class="grid-line" x1="300" y1="0" x2="300" y2="600"/>
-          <line class="grid-line" x1="400" y1="0" x2="400" y2="600"/>
-          <line class="grid-line" x1="500" y1="0" x2="500" y2="600"/>
-          <path class="country" d="M 110 220 L 145 215 L 175 195 L 215 175 L 255 165 L 290 160 L 320 158 L 360 165 L 400 170 L 440 180 L 475 195 L 500 215 L 510 240 L 510 270 L 495 300 L 470 335 L 460 365 L 470 395 L 470 430 L 450 465 L 415 495 L 370 510 L 320 510 L 270 500 L 220 480 L 175 450 L 145 420 L 120 380 L 105 340 L 95 295 L 100 255 Z"/>
-          <ellipse cx="395" cy="345" rx="32" ry="22" fill="rgba(255,216,0,0.04)" stroke="rgba(255,216,0,0.25)" stroke-width="1" stroke-dasharray="3 3"/>
-          <g transform="translate(360, 270)">
-            <circle class="pin-pulse" cx="0" cy="0" r="14"/>
-            <circle class="pin-ring" cx="0" cy="0" r="22"/>
-            <circle class="pin-bg" cx="0" cy="0" r="14"/>
-            <text class="pin-num" x="0" y="0">01</text>
-            <text class="pin-label" x="22" y="-8">MIDRAND</text>
-            <text class="pin-label" x="22" y="6" style="opacity:0.6">GAUTENG · HQ</text>
-          </g>
-          <g transform="translate(165, 470)">
-            <circle class="pin-pulse" cx="0" cy="0" r="14"/>
-            <circle class="pin-ring" cx="0" cy="0" r="20"/>
-            <circle class="pin-bg" cx="0" cy="0" r="12"/>
-            <text class="pin-num" x="0" y="0">02</text>
-            <text class="pin-label" x="20" y="-6">CAPE TOWN</text>
-            <text class="pin-label" x="20" y="6" style="opacity:0.6">W. CAPE</text>
-          </g>
-          <g transform="translate(310, 360)">
-            <circle class="pin-pulse" cx="0" cy="0" r="14"/>
-            <circle class="pin-ring" cx="0" cy="0" r="20"/>
-            <circle class="pin-bg" cx="0" cy="0" r="12"/>
-            <text class="pin-num" x="0" y="0">03</text>
-            <text class="pin-label" x="-90" y="-6" style="text-anchor:start;">BLOEMFONTEIN</text>
-            <text class="pin-label" x="-90" y="6" style="text-anchor:start; opacity:0.6">FREE STATE</text>
-          </g>
-          <g transform="translate(425, 250)">
-            <circle class="pin-pulse" cx="0" cy="0" r="14"/>
-            <circle class="pin-ring" cx="0" cy="0" r="20"/>
-            <circle class="pin-bg" cx="0" cy="0" r="12"/>
-            <text class="pin-num" x="0" y="0">04</text>
-            <text class="pin-label" x="20" y="-6">MPUMALANGA</text>
-            <text class="pin-label" x="20" y="6" style="opacity:0.6">MP</text>
-          </g>
-          <g transform="translate(305, 245)">
-            <circle class="pin-pulse" cx="0" cy="0" r="14"/>
-            <circle class="pin-ring" cx="0" cy="0" r="20"/>
-            <circle class="pin-bg" cx="0" cy="0" r="12"/>
-            <text class="pin-num" x="0" y="0">05</text>
-            <text class="pin-label" x="-58" y="-6" style="text-anchor:start;">BAPONG</text>
-            <text class="pin-label" x="-58" y="6" style="text-anchor:start; opacity:0.6">N. WEST</text>
-          </g>
-          <g transform="translate(450, 380)">
-            <circle class="pin-pulse" cx="0" cy="0" r="14"/>
-            <circle class="pin-ring" cx="0" cy="0" r="20"/>
-            <circle class="pin-bg" cx="0" cy="0" r="12"/>
-            <text class="pin-num" x="0" y="0">06</text>
-            <text class="pin-label" x="20" y="-6">P-MARITZBURG</text>
-            <text class="pin-label" x="20" y="6" style="opacity:0.6">KZN</text>
-          </g>
-          <g transform="translate(395, 175)">
-            <circle class="pin-pulse" cx="0" cy="0" r="14"/>
-            <circle class="pin-ring" cx="0" cy="0" r="20"/>
-            <circle class="pin-bg" cx="0" cy="0" r="12"/>
-            <text class="pin-num" x="0" y="0">07</text>
-            <text class="pin-label" x="20" y="-6">MAKHADO</text>
-            <text class="pin-label" x="20" y="6" style="opacity:0.6">LIMPOPO</text>
-          </g>
-          <g transform="translate(540, 70)">
-            <text class="pin-label" x="0" y="0" text-anchor="middle">N</text>
-            <line x1="0" y1="6" x2="0" y2="36" stroke="#FFD800" stroke-width="1" opacity="0.5"/>
-            <polygon points="0,6 -4,14 4,14" fill="#FFD800"/>
-          </g>
-          <g transform="translate(60, 540)">
-            <line x1="0" y1="0" x2="80" y2="0" stroke="#FFD800" stroke-width="1.5" opacity="0.5"/>
-            <line x1="0" y1="-4" x2="0" y2="4" stroke="#FFD800" stroke-width="1.5" opacity="0.5"/>
-            <line x1="80" y1="-4" x2="80" y2="4" stroke="#FFD800" stroke-width="1.5" opacity="0.5"/>
-            <text class="pin-label" x="40" y="20" text-anchor="middle" style="font-size:8px; opacity:0.6">~ 500 KM</text>
-          </g>
-        </svg>
-      </div>
-
-      <div class="legend-side reveal">
-        <span class="eyebrow"><span class="dot"></span>Tactical Network</span>
-        <h2>One country.<br><em>Seven depots.</em></h2>
-        <p class="lede">Strategically positioned to minimise lead time and freight cost from depot to site. Mining belts, industrial corridors, agricultural regions and metro markets — all within reach of an active Tingi depot.</p>
-
-        <div class="legend-stats">
-          <div><div class="lk">PROVINCES</div><div class="lv">07</div></div>
-          <div><div class="lk">DEPOTS</div><div class="lv">07</div></div>
-          <div><div class="lk">COVERAGE</div><div class="lv">100%</div></div>
-          <div><div class="lk">RESPONSE</div><div class="lv">24H</div></div>
-        </div>
-
-        <div style="margin-top: 36px; display: flex; gap: 14px; flex-wrap: wrap;">
-          <a href="contact.html" class="btn btn-yellow">Request Delivery <span class="arrow">→</span></a>
+    <section class="logistics-visual">
+      <div class="logistics-hero">
+        <div class="tanker-convoy"></div>
+        <div class="logistics-overlay">
+          <h2>Nationwide Fuel Distribution Infrastructure</h2>
+          <p>Strategic depot network enabling reliable bulk diesel delivery to industrial, commercial, and agricultural operations across South Africa.</p>
         </div>
       </div>
+    </section>
 
-    </div>
-  </div>
-</section>
-
-<!-- ============= HEAD OFFICE / HQ ============= -->
-<section>
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow dark"><span class="dot"></span>Head Office</span>
-      <h2>Midrand.<br><em>Operational HQ.</em></h2>
-    </div>
-
-    <div class="hq-grid reveal">
-      <div class="hq-visual">
-        <div>
-          <div class="label">DEPOT 01 / HQ</div>
-          <div class="city">Midrand</div>
-          <div class="country">GAUTENG · SOUTH AFRICA</div>
-        </div>
-        <div class="coords">
-          <div>COORDINATES</div>
-          <span>S 25°59' · E 28°08'</span>
-        </div>
+    <section class="interactive-map-section">
+      <div class="section-header">
+        <p class="eyebrow">National Coverage Map</p>
+        <h2>Strategic Depot Network Across South Africa</h2>
       </div>
-      <div class="hq-info">
-        <h3>Constantia Business Park</h3>
-        <div class="row"><div class="k">Address</div><div class="v">546 16th Road, Randjespark<br>Midrand, 1685</div></div>
-        <div class="row"><div class="k">Phone</div><div class="v"><a href="tel:+27615135684">0615 135 684</a><br><a href="tel:+27733511918">0733 511 918</a></div></div>
-        <div class="row"><div class="k">Email</div><div class="v"><a href="mailto:nkantingi@yahoo.com">nkantingi@yahoo.com</a></div></div>
-        <div class="row"><div class="k">Hours</div><div class="v">Mon – Fri · 07:00 – 17:00<br>Sat · 08:00 – 13:00<br>Emergency · 24/7</div></div>
-        <div class="row" style="border-bottom: none;"><div class="k">Status</div><div class="v" style="color: var(--yellow-warm);">▮ ACTIVE / DISPATCHING</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============= ALL DEPOTS GRID ============= -->
-<section>
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow dark"><span class="dot"></span>The Network</span>
-      <h2>All seven<br><em>depots.</em></h2>
-      <p class="lede">Every depot is fully provisioned, HSE-compliant and connected to the national dispatch network. Below: regional breakdown.</p>
-    </div>
-
-    <div class="depot-cards reveal">
-      <div class="depot-card">
-        <div class="head"><span>DEPOT / 01</span><span class="badge">HQ</span></div>
-        <div class="body">
-          <div class="num">01</div>
-          <h3>Midrand</h3>
-          <div class="province">Gauteng · Constantia Business Park</div>
-          <div class="desc">Head office and primary depot. Located at 546 16th Road, Randjespark — central to Johannesburg, Pretoria and the East Rand industrial belt.</div>
-        </div>
-        <div class="foot"><span>GAUTENG</span><span class="status">▮ ACTIVE</span></div>
-      </div>
-      <div class="depot-card">
-        <div class="head"><span>DEPOT / 02</span><span class="badge">REGIONAL</span></div>
-        <div class="body">
-          <div class="num">02</div>
-          <h3>Cape Town</h3>
-          <div class="province">Western Cape</div>
-          <div class="desc">Regional distribution depot servicing the Western Cape — covering the metro, Cape Winelands, agricultural sector and harbour-bound logistics.</div>
-        </div>
-        <div class="foot"><span>W. CAPE</span><span class="status">▮ ACTIVE</span></div>
-      </div>
-      <div class="depot-card">
-        <div class="head"><span>DEPOT / 03</span><span class="badge">CENTRAL</span></div>
-        <div class="body">
-          <div class="num">03</div>
-          <h3>Bloemfontein</h3>
-          <div class="province">Free State</div>
-          <div class="desc">Central South Africa depot — ideal for cross-country freight, agricultural fuel supply across the Free State, and N1 corridor logistics.</div>
-        </div>
-        <div class="foot"><span>FREE STATE</span><span class="status">▮ ACTIVE</span></div>
-      </div>
-      <div class="depot-card">
-        <div class="head"><span>DEPOT / 04</span><span class="badge">MINING</span></div>
-        <div class="body">
-          <div class="num">04</div>
-          <h3>Mpumalanga</h3>
-          <div class="province">Mpumalanga</div>
-          <div class="desc">Mining and industrial depot servicing the coal belt, power generation infrastructure and the heavy industrial sector across Mpumalanga.</div>
-        </div>
-        <div class="foot"><span>MPUMALANGA</span><span class="status">▮ ACTIVE</span></div>
-      </div>
-      <div class="depot-card">
-        <div class="head"><span>DEPOT / 05</span><span class="badge">REGIONAL</span></div>
-        <div class="body">
-          <div class="num">05</div>
-          <h3>Bapong</h3>
-          <div class="province">North West</div>
-          <div class="desc">North West regional depot positioned for the platinum belt, Rustenburg-area mining operations and surrounding agricultural communities.</div>
-        </div>
-        <div class="foot"><span>N. WEST</span><span class="status">▮ ACTIVE</span></div>
-      </div>
-      <div class="depot-card">
-        <div class="head"><span>DEPOT / 06</span><span class="badge">REGIONAL</span></div>
-        <div class="body">
-          <div class="num">06</div>
-          <h3>Pietermaritzburg</h3>
-          <div class="province">KwaZulu-Natal</div>
-          <div class="desc">KZN depot servicing the broader Durban metro, the Midlands, sugar-cane belt and the N3 logistics corridor down to the port.</div>
-        </div>
-        <div class="foot"><span>KZN</span><span class="status">▮ ACTIVE</span></div>
-      </div>
-      <div class="depot-card">
-        <div class="head"><span>DEPOT / 07</span><span class="badge">NORTHERN</span></div>
-        <div class="body">
-          <div class="num">07</div>
-          <h3>Makhado</h3>
-          <div class="province">Limpopo · Northern Region</div>
-          <div class="desc">Northern depot covering Limpopo Province — agricultural, cross-border logistics into Zimbabwe, and the broader northern industrial sector.</div>
-        </div>
-        <div class="foot"><span>LIMPOPO</span><span class="status">▮ ACTIVE</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============= PROMISE ============= -->
-<section class="promise">
-  <div class="container reveal" style="margin: 0 auto;">
-    <span class="badge">/ COVERAGE GUARANTEE</span>
-    <h2>Countrywide delivery<br>guaranteed.</h2>
-    <p>You will receive your bulk diesel order where you want it, when you need it. From the nearest active depot, dispatched on schedule, verified on-site.</p>
-    <div style="margin-top: 36px; display: flex; gap: 14px; flex-wrap: wrap;">
-      <a href="contact.html" class="btn btn-blue">Request a Quote <span class="arrow">→</span></a>
-      <a href="tel:+27733511918" class="btn btn-outline">☎ 0733 511 918</a>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<footer class="site-footer">
-  <div class="footer-top">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="name">TINGI</div>
-          <div class="sub">PETROLEUM</div>
-          <p>South Africa's leading clean fuel provider. We supply more than just fuel — sustainability is our core value.</p>
-          <div style="margin-top: 22px; display: flex; flex-direction: column; gap: 6px; font-family: var(--mono); font-size: 13px;">
-            <a href="tel:+27733511918" style="color: var(--yellow);">☎ 0733 511 918</a>
-            <a href="mailto:nkantingi@yahoo.com" style="color: rgba(255,255,255,0.6);">@ nkantingi@yahoo.com</a>
+      <div class="depot-map-shell">
+        <div class="depot-map-copy">
+          <p class="eyebrow">Depot Routing</p>
+          <h3>Seven supply hubs connected through Midrand dispatch.</h3>
+          <p>The interface highlights Tingi Petroleum's operating depots and the national distribution routes used to coordinate bulk diesel supply.</p>
+          <div class="depot-map-stats" aria-label="Depot network summary">
+            <span><strong>7</strong> depots</span>
+            <span><strong>50ppm</strong> diesel</span>
+            <span><strong>24/7</strong> dispatch</span>
           </div>
         </div>
-        <div class="footer-col"><h5>Company</h5><ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="about.html#mission">Our Mission</a></li>
-          <li><a href="about.html#vision">Our Vision</a></li>
-          <li><a href="about.html#values">Our Values</a></li>
-          <li><a href="about.html#compliance">Compliance</a></li>
-        </ul></div>
-        <div class="footer-col"><h5>Services</h5><ul>
-          <li><a href="services.html">Bulk Diesel</a></li>
-          <li><a href="services.html">Mobile Refueling</a></li>
-          <li><a href="services.html">Tanks &amp; Equipment</a></li>
-          <li><a href="services.html">Product Testing</a></li>
-          <li><a href="contact.html">Get a Quote</a></li>
-        </ul></div>
-        <div class="footer-col"><h5>Depots</h5><ul>
-          <li><a href="depots.html">Midrand (HQ)</a></li>
-          <li><a href="depots.html">Cape Town</a></li>
-          <li><a href="depots.html">Bloemfontein</a></li>
-          <li><a href="depots.html">Mpumalanga</a></li>
-          <li><a href="depots.html">More Locations</a></li>
-        </ul></div>
-        <div class="footer-col"><h5>Sustainability</h5><ul>
-          <li><a href="sustainability.html">Clean Fuel Vision</a></li>
-          <li><a href="sustainability.html">Low-Carbon Economy</a></li>
-          <li><a href="sustainability.html">Job Creation</a></li>
-          <li><a href="sustainability.html">Energy Poverty</a></li>
-          <li><a href="sustainability.html">ESG Commitment</a></li>
-        </ul></div>
+        <div class="depot-map-panel">
+          <div id="depotChart" aria-label="Interactive Tingi Petroleum depot network map"></div>
+          <noscript>
+            <p class="map-fallback">Enable JavaScript to view the interactive depot network map.</p>
+          </noscript>
+        </div>
       </div>
-      <div style="margin-top: 60px; padding-top: 28px; border-top: 1px solid rgba(255,216,0,0.1); display: flex; gap: 10px; flex-wrap: wrap;">
-        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.55); text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(255,216,0,0.2);">CIPC REGISTERED</span>
-        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.55); text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(255,216,0,0.2);">B-BBEE LEVEL 1</span>
-        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.55); text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(255,216,0,0.2);">HSE COMPLIANT</span>
-        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.55); text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(255,216,0,0.2);">COIDA</span>
-        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.55); text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(255,216,0,0.2);">UIF</span>
-        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.55); text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(255,216,0,0.2);">SARS</span>
+      <div class="map-legend">
+        <div class="legend-item">
+          <div class="legend-dot"></div>
+          <span>Active Tingi Depot</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-line"></div>
+          <span>Midrand Dispatch Route</span>
+        </div>
       </div>
+    </section>
+
+    <section class="operational-coverage">
+      <div class="section-header">
+        <p class="eyebrow">Operational Coverage</p>
+        <h2>Nationwide Supply Capability</h2>
+      </div>
+      <div class="coverage-metrics">
+        <div class="coverage-item">
+          <strong>7</strong>
+          <span>Active Depots</span>
+          <p>Strategic locations across South Africa</p>
+        </div>
+        <div class="coverage-item">
+          <strong>24/7</strong>
+          <span>Dispatch Capability</span>
+          <p>Round-the-clock fuel distribution</p>
+        </div>
+        <div class="coverage-item">
+          <strong>100%</strong>
+          <span>Nationwide Coverage</span>
+          <p>Complete regional distribution</p>
+        </div>
+        <div class="coverage-item">
+          <strong>50ppm</strong>
+          <span>Premium Diesel</span>
+          <p>Clean fuel standard nationwide</p>
+        </div>
+      </div>
+    </section>
+    <section class="depot-cards-enhanced">
+      <div class="section-header">
+        <p class="eyebrow">Regional Operations Centers</p>
+        <h2>Strategic Depot Infrastructure</h2>
+      </div>
+      
+      <div class="depot-grid">
+        <article class="depot-card" id="midrand">
+          <div class="depot-visual">
+            <div class="depot-image"></div>
+            <div class="status-badge">ACTIVE SUPPLY HUB</div>
+          </div>
+          <div class="depot-content">
+            <div class="depot-number">01</div>
+            <h3>Midrand</h3>
+            <p class="depot-role">Head Office & Primary Distribution Hub</p>
+            <p class="depot-description">Central command for national operations, bulk dispatch coordination, and Gauteng regional supply coverage.</p>
+            <div class="depot-capabilities">
+              <div class="capability">
+                <strong>Bulk Dispatch</strong>
+                <span>National coordination</span>
+              </div>
+              <div class="capability">
+                <strong>Fleet Coordination</strong>
+                <span>24/7 operations</span>
+              </div>
+              <div class="capability">
+                <strong>Storage Infrastructure</strong>
+                <span>Large-scale capacity</span>
+              </div>
+            </div>
+            <div class="depot-contact">
+              <p><strong>Address:</strong> 546 16th Road, Randjespark, Midrand</p>
+              <p><strong>Region:</strong> Gauteng Provincial Coverage</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="depot-card" id="cape-town">
+          <div class="depot-visual">
+            <div class="depot-image"></div>
+            <div class="status-badge">REGIONAL DISTRIBUTION</div>
+          </div>
+          <div class="depot-content">
+            <div class="depot-number">02</div>
+            <h3>Cape Town</h3>
+            <p class="depot-role">Western Cape Regional Distribution Hub</p>
+            <p class="depot-description">Strategic distribution support for Western Cape logistics, commercial supply, and port operations.</p>
+            <div class="depot-capabilities">
+              <div class="capability">
+                <strong>Regional Distribution</strong>
+                <span>Western Cape coverage</span>
+              </div>
+              <div class="capability">
+                <strong>Port Supply</strong>
+                <span>Maritime logistics</span>
+              </div>
+              <div class="capability">
+                <strong>Commercial Support</strong>
+                <span>Business sector fuel</span>
+              </div>
+            </div>
+            <div class="depot-contact">
+              <p><strong>Region:</strong> Western Cape Provincial Coverage</p>
+              <p><strong>Focus:</strong> Commercial & Industrial Supply</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="depot-card" id="bloemfontein">
+          <div class="depot-visual">
+            <div class="depot-image"></div>
+            <div class="status-badge">REGIONAL SUPPLY</div>
+          </div>
+          <div class="depot-content">
+            <div class="depot-number">03</div>
+            <h3>Bloemfontein</h3>
+            <p class="depot-role">Central South Africa Regional Depot</p>
+            <p class="depot-description">Central positioning for Free State and surrounding regions, supporting agricultural and industrial operations.</p>
+            <div class="depot-capabilities">
+              <div class="capability">
+                <strong>Central Coverage</strong>
+                <span>Free State region</span>
+              </div>
+              <div class="capability">
+                <strong>Agricultural Support</strong>
+                <span>Farming sector fuel</span>
+              </div>
+              <div class="capability">
+                <strong>Industrial Supply</strong>
+                <span>Manufacturing support</span>
+              </div>
+            </div>
+            <div class="depot-contact">
+              <p><strong>Region:</strong> Free State Provincial Coverage</p>
+              <p><strong>Focus:</strong> Agricultural & Industrial</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="depot-card" id="mpumalanga">
+          <div class="depot-visual">
+            <div class="depot-image"></div>
+            <div class="status-badge">MINING SUPPORT</div>
+          </div>
+          <div class="depot-content">
+            <div class="depot-number">04</div>
+            <h3>Mpumalanga</h3>
+            <p class="depot-role">Mining & Industrial Operations Depot</p>
+            <p class="depot-description">Specialized support for mining and industrial operations across Mpumalanga and surrounding regions.</p>
+            <div class="depot-capabilities">
+              <div class="capability">
+                <strong>Mining Support</strong>
+                <span>Heavy industry focus</span>
+              </div>
+              <div class="capability">
+                <strong>Industrial Supply</strong>
+                <span>Manufacturing fuel</span>
+              </div>
+              <div class="capability">
+                <strong>Heavy Equipment</strong>
+                <span>Mining machinery fuel</span>
+              </div>
+            </div>
+            <div class="depot-contact">
+              <p><strong>Region:</strong> Mpumalanga Provincial Coverage</p>
+              <p><strong>Focus:</strong> Mining & Industrial Operations</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="depot-card" id="bapong">
+          <div class="depot-visual">
+            <div class="depot-image"></div>
+            <div class="status-badge">REGIONAL DEPOT</div>
+          </div>
+          <div class="depot-content">
+            <div class="depot-number">05</div>
+            <h3>Bapong</h3>
+            <p class="depot-role">North West Regional Depot</p>
+            <p class="depot-description">Regional distribution hub supporting North West province mining, agricultural, and industrial operations.</p>
+            <div class="depot-capabilities">
+              <div class="capability">
+                <strong>Regional Coverage</strong>
+                <span>North West province</span>
+              </div>
+              <div class="capability">
+                <strong>Mining Support</strong>
+                <span>Platinum belt operations</span>
+              </div>
+              <div class="capability">
+                <strong>Agricultural Supply</strong>
+                <span>Farming sector support</span>
+              </div>
+            </div>
+            <div class="depot-contact">
+              <p><strong>Region:</strong> North West Provincial Coverage</p>
+              <p><strong>Focus:</strong> Mining & Agricultural</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="depot-card" id="pietermaritzburg">
+          <div class="depot-visual">
+            <div class="depot-image"></div>
+            <div class="status-badge">REGIONAL SUPPLY</div>
+          </div>
+          <div class="depot-content">
+            <div class="depot-number">06</div>
+            <h3>Pietermaritzburg</h3>
+            <p class="depot-role">KwaZulu-Natal Regional Depot</p>
+            <p class="depot-description">Strategic supply hub for KwaZulu-Natal industrial, logistics, and agricultural operations.</p>
+            <div class="depot-capabilities">
+              <div class="capability">
+                <strong>Regional Coverage</strong>
+                <span>KZN province</span>
+              </div>
+              <div class="capability">
+                <strong>Port Support</strong>
+                <span>Durban logistics</span>
+              </div>
+              <div class="capability">
+                <strong>Industrial Supply</strong>
+                <span>Manufacturing support</span>
+              </div>
+            </div>
+            <div class="depot-contact">
+              <p><strong>Region:</strong> KwaZulu-Natal Provincial Coverage</p>
+              <p><strong>Focus:</strong> Industrial & Port Operations</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="depot-card" id="makhado">
+          <div class="depot-visual">
+            <div class="depot-image"></div>
+            <div class="status-badge">NORTHERN SUPPLY</div>
+          </div>
+          <div class="depot-content">
+            <div class="depot-number">07</div>
+            <h3>Makhado</h3>
+            <p class="depot-role">Limpopo Northern Supply Depot</p>
+            <p class="depot-description">Northernmost depot supporting Limpopo mining, agricultural, and cross-border operations.</p>
+            <div class="depot-capabilities">
+              <div class="capability">
+                <strong>Northern Coverage</strong>
+                <span>Limpopo province</span>
+              </div>
+              <div class="capability">
+                <strong>Mining Support</strong>
+                <span>Northern mining belt</span>
+              </div>
+              <div class="capability">
+                <strong>Cross-Border</strong>
+                <span>Regional logistics</span>
+              </div>
+            </div>
+            <div class="depot-contact">
+              <p><strong>Region:</strong> Limpopo Provincial Coverage</p>
+              <p><strong>Focus:</strong> Mining & Cross-Border Operations</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="distribution-process">
+      <div class="section-header">
+        <p class="eyebrow">How Fuel Moves Through The Network</p>
+        <h2>Intelligent Distribution System</h2>
+      </div>
+      <div class="process-flow">
+        <div class="process-step">
+          <div class="step-icon"><i class="fas fa-clipboard-list"></i></div>
+          <h3>Request Supply</h3>
+          <p>Submit fuel requirements and location for optimal depot routing.</p>
+        </div>
+        <div class="process-arrow">→</div>
+        <div class="process-step">
+          <div class="step-icon"><i class="fas fa-map"></i></div>
+          <h3>Route From Nearest Depot</h3>
+          <p>System identifies optimal depot and calculates efficient delivery route.</p>
+        </div>
+        <div class="process-arrow">→</div>
+        <div class="process-step">
+          <div class="step-icon"><i class="fas fa-truck"></i></div>
+          <h3>Dispatch Tanker</h3>
+          <p>HSE-compliant tanker dispatched with quality verification protocols.</p>
+        </div>
+        <div class="process-arrow">→</div>
+        <div class="process-step">
+          <div class="step-icon"><i class="fas fa-industry"></i></div>
+          <h3>Deliver On-Site</h3>
+          <p>Professional fuel transfer with safety procedures and operational coordination.</p>
+        </div>
+        <div class="process-arrow">→</div>
+        <div class="process-step">
+          <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+          <h3>Verify Fuel Quality</h3>
+          <p>On-site testing and documentation provided before acceptance.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="emergency-dispatch">
+      <div class="emergency-content">
+        <div class="emergency-text">
+          <p class="eyebrow">24/7 Emergency Supply</p>
+          <h2>Rapid Dispatch for Urgent Fuel Demand</h2>
+          <p>Emergency fuel supply capability for critical operations, fleet requirements, generator systems, and urgent industrial demand. Our national network ensures rapid response when uptime matters most.</p>
+          <div class="emergency-features">
+            <div class="emergency-feature">
+              <strong>⚡ Rapid Response</strong>
+              <span>Emergency dispatch within 2 hours</span>
+            </div>
+            <div class="emergency-feature">
+              <strong>🌙 24/7 Availability</strong>
+              <span>Round-the-clock emergency support</span>
+            </div>
+            <div class="emergency-feature">
+              <strong>🚑 Priority Routing</strong>
+              <span>Emergency fleet prioritization</span>
+            </div>
+          </div>
+          <a class="btn btn-emergency" href="tel:+27733511918">Call Emergency Supply</a>
+        </div>
+        <div class="emergency-visual">
+          <div class="emergency-truck"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div>
+        <img src="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI1-Outline_wstxcj.png" alt="Tingi Petroleum">
+        <p>South Africa's leading clean fuel provider. We supply more than just fuel - sustainability is our core value.</p>
+        <p><a href="tel:+27733511918">0733 511 918</a><br><a href="mailto:nkantingi@yahoo.com">nkantingi@yahoo.com</a></p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <div><h3>Company</h3><a href="about.html">About Us</a><a href="sustainability.html">Our Vision</a><a href="about.html#compliance">Compliance</a></div>
+        <div><h3>Services</h3><a href="services.html#bulk">Bulk Diesel</a><a href="services.html#mobile">Mobile Refueling</a><a href="services.html#equipment">Tanks & Equipment</a></div>
+        <div><h3>Depots</h3><a href="depots.html#midrand">Midrand</a><a href="depots.html#cape-town">Cape Town</a><a href="depots.html#makhado">Makhado</a></div>
+        <div><h3>Connect</h3><a href="tel:+27733511918">0733 511 918</a><a href="mailto:nkantingi@yahoo.com">nkantingi@yahoo.com</a><a href="contact.html">Get A Quote</a></div>
+      </nav>
     </div>
-  </div>
-  <div class="container">
-    <div class="footer-bottom">
-      <span>© 2026 Tingi Financial Services (Pty) Ltd · Trading as Tingi Petroleum Services</span>
-      <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: rgba(255,255,255,0.3);">Website by Occxlnce</span>
-    </div>
-  </div>
-</footer>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  if (!window.am5 || !window.am5map || !window.am5geodata_worldLow || !document.getElementById('chartdiv')) return;
-
-  am5.ready(function () {
-    var root = am5.Root.new('chartdiv');
-
-    var tingiTheme = am5.Theme.new(root);
-    tingiTheme.rule('InterfaceColors').setAll({
-      primaryButton: am5.color(0xFFD800),
-      primaryButtonHover: am5.color(0x003366),
-      primaryButtonDown: am5.color(0x00224A),
-      primaryButtonActive: am5.color(0xFFD800),
-      primaryButtonText: am5.color(0x003366),
-      secondaryButton: am5.color(0xF4F5F6),
-      secondaryButtonHover: am5.color(0xFFD800),
-      secondaryButtonText: am5.color(0x003366),
-      background: am5.color(0x003366),
-      text: am5.color(0xFFD800)
-    });
-
-    root.setThemes([am5themes_Animated.new(root), tingiTheme]);
-    root.interfaceColors.set('text', am5.color(0xFFD800));
-
-    var blue = am5.color(0x003366);
-    var blueDeep = am5.color(0x00224A);
-    var yellow = am5.color(0xFFD800);
-    var paper = am5.color(0xF4F5F6);
-    var lineBlue = am5.color(0x2D5D8A);
-
-    var chart = root.container.children.push(am5map.MapChart.new(root, {
-      panX: 'rotateX',
-      panY: 'rotateY',
-      projection: am5map.geoOrthographic(),
-      homeGeoPoint: { longitude: 24, latitude: -29 },
-      homeRotationX: -24,
-      homeRotationY: 29,
-      homeZoomLevel: 1.35,
-      minZoomLevel: 0.8,
-      zoomLevel: 1.35
-    }));
-
-    var bgSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {}));
-    bgSeries.mapPolygons.template.setAll({
-      fill: blue,
-      fillOpacity: 1,
-      strokeOpacity: 0
-    });
-    bgSeries.data.push({ geometry: am5map.getGeoRectangle(90, 180, -90, -180) });
-
-    var graticuleSeries = chart.series.push(am5map.GraticuleSeries.new(root, {}));
-    graticuleSeries.mapLines.template.setAll({
-      stroke: lineBlue,
-      strokeOpacity: 0.42,
-      strokeWidth: 0.55
-    });
-
-    var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
-      geoJSON: am5geodata_worldLow
-    }));
-    polygonSeries.mapPolygons.template.setAll({
-      fill: blueDeep,
-      stroke: lineBlue,
-      strokeWidth: 0.45,
-      strokeOpacity: 0.55,
-      tooltipText: '{name}'
-    });
-
-    polygonSeries.events.on('datavalidated', function () {
-      am5.array.each(polygonSeries.dataItems, function (dataItem) {
-        if (dataItem.get('id') === 'ZA') {
-          dataItem.get('mapPolygon').setAll({
-            fill: yellow,
-            stroke: paper,
-            strokeWidth: 1.2,
-            tooltipText: 'South Africa / Tingi Petroleum depot network'
-          });
-        }
-      });
-    });
-
-    var depots = [
-      { id: '01', name: 'Midrand HQ', province: 'Gauteng', longitude: 28.128, latitude: -25.995, hq: true },
-      { id: '02', name: 'Cape Town', province: 'Western Cape', longitude: 18.424, latitude: -33.925 },
-      { id: '03', name: 'Bloemfontein', province: 'Free State', longitude: 26.204, latitude: -29.085 },
-      { id: '04', name: 'Mpumalanga', province: 'Mpumalanga', longitude: 30.985, latitude: -25.475 },
-      { id: '05', name: 'Bapong', province: 'North West', longitude: 27.480, latitude: -25.705 },
-      { id: '06', name: 'Pietermaritzburg', province: 'KwaZulu-Natal', longitude: 30.393, latitude: -29.601 },
-      { id: '07', name: 'Makhado', province: 'Limpopo', longitude: 29.945, latitude: -23.044 }
-    ];
-
-    var hq = depots[0];
-    var routeSeries = chart.series.push(am5map.MapLineSeries.new(root, {}));
-    routeSeries.mapLines.template.setAll({
-      stroke: yellow,
-      strokeOpacity: 0.44,
-      strokeWidth: 1.4,
-      lineDash: [4, 4]
-    });
-    routeSeries.data.setAll(depots.slice(1).map(function (depot) {
-      return {
-        geometry: {
-          type: 'LineString',
-          coordinates: [[hq.longitude, hq.latitude], [depot.longitude, depot.latitude]]
-        },
-        name: 'Midrand > ' + depot.name
-      };
-    }));
-
-    var pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {
-      latitudeField: 'latitude',
-      longitudeField: 'longitude'
-    }));
-
-    pointSeries.bullets.push(function (root, series, dataItem) {
-      var data = dataItem.dataContext;
-      var container = am5.Container.new(root, {
-        cursorOverStyle: 'pointer',
-        tooltipText: data.id + ' / ' + data.name + '\n' + data.province
-      });
-
-      container.children.push(am5.Circle.new(root, {
-        radius: data.hq ? 10 : 8,
-        fill: data.hq ? blue : yellow,
-        stroke: data.hq ? yellow : blue,
-        strokeWidth: 2
-      }));
-
-      container.children.push(am5.Circle.new(root, {
-        radius: data.hq ? 18 : 15,
-        fillOpacity: 0,
-        stroke: yellow,
-        strokeOpacity: 0.28,
-        strokeWidth: 1.5
-      }));
-
-      container.children.push(am5.Label.new(root, {
-        text: data.id,
-        centerX: am5.p50,
-        centerY: am5.p50,
-        fontSize: 9,
-        fontWeight: '700',
-        fill: data.hq ? yellow : blue
-      }));
-
-      container.children.push(am5.Label.new(root, {
-        text: data.name,
-        x: 18,
-        centerY: am5.p50,
-        fontSize: 11,
-        fontWeight: '700',
-        fill: yellow,
-        background: am5.RoundedRectangle.new(root, {
-          fill: blue,
-          fillOpacity: 0.72,
-          cornerRadiusTL: 0,
-          cornerRadiusTR: 0,
-          cornerRadiusBL: 0,
-          cornerRadiusBR: 0
-        }),
-        paddingLeft: 7,
-        paddingRight: 7,
-        paddingTop: 3,
-        paddingBottom: 3
-      }));
-
-      return am5.Bullet.new(root, { sprite: container });
-    });
-
-    pointSeries.data.setAll(depots);
-
-    var titleCont = chart.children.push(am5.Container.new(root, {
-      layout: root.verticalLayout,
-      x: am5.p50,
-      centerX: am5.p50,
-      y: 14,
-      position: 'absolute'
-    }));
-
-    titleCont.children.push(am5.Label.new(root, {
-      text: 'Tingi Petroleum Depot Network',
-      fontSize: 18,
-      fontWeight: '600',
-      fill: yellow,
-      x: am5.p50,
-      centerX: am5.p50
-    }));
-
-    titleCont.children.push(am5.Label.new(root, {
-      text: 'Seven active depot locations across South Africa',
-      fontSize: 11,
-      fill: paper,
-      x: am5.p50,
-      centerX: am5.p50
-    }));
-
-    var switchCont = chart.children.push(am5.Container.new(root, {
-      layout: root.horizontalLayout,
-      x: 20,
-      y: 40
-    }));
-
-    switchCont.children.push(am5.Label.new(root, {
-      centerY: am5.p50,
-      text: 'Globe',
-      fill: yellow,
-      fontSize: 13
-    }));
-
-    var switchButton = switchCont.children.push(am5.Button.new(root, {
-      themeTags: ['switch'],
-      centerY: am5.p50,
-      icon: am5.Circle.new(root, { themeTags: ['icon'] })
-    }));
-
-    switchCont.children.push(am5.Label.new(root, {
-      centerY: am5.p50,
-      text: 'Map',
-      fill: yellow,
-      fontSize: 13
-    }));
-
-    var easing = am5.ease.inOut(am5.ease.cubic);
-    var duration = 1200;
-
-    function zoomToGlobe() {
-      chart.set('projection', am5map.geoOrthographic());
-      chart.set('panX', 'rotateX');
-      chart.set('panY', 'rotateY');
-      chart.animate({ key: 'rotationX', to: -24, duration: duration, easing: easing });
-      chart.animate({ key: 'rotationY', to: 29, duration: duration, easing: easing });
-      chart.animate({ key: 'zoomLevel', to: 1.55, duration: duration, easing: easing });
-      bgSeries.mapPolygons.template.set('fillOpacity', 1);
-    }
-
-    function zoomToMap() {
-      chart.set('projection', am5map.geoMercator());
-      chart.set('panX', 'translateX');
-      chart.set('panY', 'translateY');
-      chart.animate({ key: 'rotationY', to: 0, duration: duration, easing: easing });
-      setTimeout(function () {
-        chart.zoomToGeoPoint({ longitude: 24.5, latitude: -29.2 }, 4.2, true, duration);
-      }, 100);
-      bgSeries.mapPolygons.template.set('fillOpacity', 0);
-    }
-
-    switchButton.on('active', function () {
-      chart.goHome(duration);
-      chart.seriesContainer.animate({ key: 'opacity', to: 0, duration: 260 });
-      setTimeout(function () {
-        if (switchButton.get('active')) {
-          zoomToMap();
-        } else {
-          zoomToGlobe();
-        }
-        chart.seriesContainer.animate({ key: 'opacity', to: 1, duration: 260 });
-      }, duration);
-    });
-
-    var zoomControl = chart.set('zoomControl', am5map.ZoomControl.new(root, {}));
-    zoomControl.homeButton.set('visible', true);
-
-    chart.appear(900, 100);
-    setTimeout(zoomToGlobe, 900);
-  });
-});
-</script>
-<script src="main.js"></script>
+    <div class="footer-bottom"><span>© 2025 Tingi Financial Services (Pty) Ltd. Trading as Tingi Petroleum Services.</span></div>
+  </footer>
+  <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/depot-map.js"></script>
+  <script src="js/cookie-consent.js"></script>
 </body>
 </html>

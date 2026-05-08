@@ -1,1286 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tingi Petroleum — Powering Progress. Fueling Tomorrow.</title>
-<meta name="description" content="Tingi Petroleum is an established bulk diesel provider delivering premium 50ppm clean fuel solutions across South Africa and the African continent. Sustainability is our core value.">
-<link rel="icon" type="image/png" href="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI1-Outline_wstxcj.png">
-<link rel="stylesheet" href="styles.css">
-<style>
-/* ======================= HERO ======================= */
-.home-hero {
-  background: var(--blue);
-  color: var(--white);
-  padding: 50px 0 0;
-  position: relative;
-  overflow: hidden;
-  min-height: calc(100vh - 80px);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* Constructivist geometric circles — replace crosshatch */
-.home-hero::before {
-  content: "";
-  position: absolute;
-  right: -200px; top: -160px;
-  width: 680px; height: 680px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,216,0,0.07);
-  pointer-events: none;
-}
-
-.hero-tag-row {
-  position: relative;
-  z-index: 5;
-  border-bottom: 1px solid rgba(255,216,0,0.12);
-  padding: 0 var(--gutter);
-}
-.hero-tag-row .row {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 12px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255,216,0,0.55);
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.hero-tag-row .row > div { display: flex; align-items: center; gap: 14px; }
-.hero-tag-row .row .pip {
-  display: inline-block;
-  width: 5px; height: 5px;
-  background: var(--yellow);
-  border-radius: 50%;
-  animation: pip-pulse 1.6s ease-in-out infinite;
-}
-@keyframes pip-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
-.hero-main {
-  position: relative;
-  z-index: 4;
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: center;
-  padding: clamp(40px, 6vw, 80px) var(--gutter);
-  max-width: var(--max);
-  margin: 0 auto;
-  width: 100%;
-  gap: 60px;
-}
-@media (min-width: 1100px) {
-  .hero-main { grid-template-columns: 1.5fr 1fr; gap: 80px; }
-}
-
-.hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--yellow);
-  margin-bottom: 32px;
-}
-.hero-eyebrow::before {
-  content: "";
-  display: inline-block;
-  width: 0; height: 0;
-  border-left: 6px solid var(--yellow);
-  border-top: 3.5px solid transparent;
-  border-bottom: 3.5px solid transparent;
-}
-
-.hero-title {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: clamp(50px, 9vw, 148px);
-  line-height: 0.92;
-  letter-spacing: -0.025em;
-  color: var(--white);
-  text-transform: uppercase;
-}
-.hero-title .line { display: block; }
-.hero-title .accent { color: var(--yellow); }
-
-.hero-rotate-wrap {
-  margin-top: 32px;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: clamp(20px, 2.4vw, 34px);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  color: var(--yellow);
-  padding-top: 24px;
-  border-top: 1px solid rgba(255,216,0,0.18);
-}
-.hero-rotate-wrap .label {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.28em;
-  color: rgba(255,255,255,0.4);
-  font-weight: 500;
-}
-.rotator {
-  display: inline-block;
-  transition: opacity .28s ease, transform .28s ease;
-  min-width: 220px;
-}
-
-.hero-body {
-  margin-top: 30px;
-  max-width: 520px;
-  font-size: 16px;
-  line-height: 1.75;
-  color: rgba(255,255,255,0.7);
-}
-.hero-body strong { color: var(--white); font-weight: 600; }
-
-.hero-actions {
-  margin-top: 40px;
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-/* ============ HERO RIGHT — Constructivist Geometric Panel ============ */
-.hero-geo-panel {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 28px;
-}
-
-.hero-tag-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--blue);
-  background: var(--yellow);
-  padding: 9px 18px;
-  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-}
-
-/* Large outlined circle — core Constructivist element */
-.hero-ring-frame {
-  position: relative;
-  width: clamp(220px, 26vw, 340px);
-  aspect-ratio: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-self: center;
-}
-.hero-ring-frame .ring-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%; height: 100%;
-}
-.hero-ring-frame .droplet-inner {
-  position: relative;
-  z-index: 2;
-  width: 52%;
-}
-.hero-ring-frame .droplet-inner svg { width: 100%; height: auto; }
-
-/* Data strip below circle */
-.hero-data-strip {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: rgba(255,216,0,0.15);
-}
-.hero-data-strip .data-cell {
-  background: rgba(0,24,48,0.7);
-  padding: 16px 18px;
-  font-family: var(--mono);
-}
-.hero-data-strip .data-cell .k {
-  font-size: 9px;
-  letter-spacing: 0.26em;
-  color: rgba(255,216,0,0.5);
-  text-transform: uppercase;
-}
-.hero-data-strip .data-cell .v {
-  margin-top: 4px;
-  font-size: 15px;
-  color: var(--yellow);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  font-family: var(--display);
-}
-
-/* Hero trust bottom strip */
-.hero-trust {
-  position: relative;
-  z-index: 4;
-  background: var(--blue-deep);
-  padding: 22px var(--gutter);
-  border-top: 1px solid rgba(255,216,0,0.12);
-}
-.hero-trust-row {
-  max-width: var(--max);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px 40px;
-  font-family: var(--mono);
-  text-transform: uppercase;
-}
-@media (min-width: 800px) { .hero-trust-row { grid-template-columns: repeat(4, 1fr); } }
-.trust-pill {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  color: rgba(255,255,255,0.7);
-  font-weight: 500;
-}
-.trust-pill .num {
-  font-family: var(--display);
-  font-size: 22px;
-  color: var(--yellow);
-  font-weight: 700;
-  letter-spacing: 0;
-}
-
-/* ======================= ABOUT ======================= */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 50px;
-}
-@media (min-width: 950px) { .about-grid { grid-template-columns: 1fr 1.3fr; gap: 90px; } }
-.about-grid .body p {
-  font-size: 17px;
-  line-height: 1.8;
-  color: var(--blue);
-  margin-bottom: 1.4em;
-}
-
-.compliance-strip {
-  margin-top: 60px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0;
-  border-top: 1px solid var(--gray);
-}
-@media (min-width: 700px) { .compliance-strip { grid-template-columns: repeat(4, 1fr); } }
-
-.comply {
-  padding: 28px 24px;
-  border-right: 1px solid var(--gray);
-  border-bottom: 1px solid var(--gray);
-  background: var(--paper);
-  border-left: 3px solid transparent;
-  transition: border-left-color .3s ease, background .25s ease;
-}
-.comply:last-child { border-right: none; }
-.comply:hover { border-left-color: var(--yellow); background: var(--white); }
-.comply .code {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  color: var(--yellow);
-  font-weight: 700;
-}
-.comply h4 { margin-top: 12px; font-size: 15px; color: var(--blue); }
-.comply p { margin-top: 5px; font-size: 12px; color: var(--blue); opacity: 0.6; line-height: 1.5; }
-@media (max-width: 699px) {
-  .comply:nth-child(2n) { border-right: none; }
-}
-
-/* ======================= VALUES ======================= */
-.values-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1px;
-  background: var(--gray);
-}
-@media (min-width: 700px) { .values-grid { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1100px) { .values-grid { grid-template-columns: repeat(4, 1fr); } }
-
-.value-cell {
-  padding: 50px 36px;
-  background: var(--paper);
-  position: relative;
-  overflow: hidden;
-  border-left: 3px solid transparent;
-  transition: background .3s ease, border-left-color .3s ease;
-}
-.value-cell:hover { background: var(--white); border-left-color: var(--yellow); }
-/* Triangle accent — Constructivist corner mark */
-.value-cell::after {
-  content: "";
-  position: absolute;
-  top: 0; right: 0;
-  width: 0; height: 0;
-  border-right: 28px solid var(--yellow);
-  border-bottom: 28px solid transparent;
-  opacity: 0;
-  transition: opacity .3s ease;
-}
-.value-cell:hover::after { opacity: 1; }
-.value-cell .v-num {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  color: var(--yellow);
-  font-weight: 700;
-}
-.value-cell h3 { margin-top: 22px; font-size: 26px; color: var(--blue); }
-.value-cell p {
-  margin-top: 14px;
-  font-size: 14.5px;
-  line-height: 1.7;
-  color: var(--blue);
-  opacity: 0.8;
-}
-
-/* ======================= SERVICES PREVIEW ======================= */
-.svc-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1px;
-  background: var(--gray);
-}
-@media (min-width: 800px) { .svc-grid { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1100px) { .svc-grid { grid-template-columns: repeat(4, 1fr); } }
-
-.svc-card {
-  position: relative;
-  background: var(--white);
-  padding: 0;
-  border-left: 3px solid transparent;
-  transition: border-left-color .3s ease;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-.svc-card:hover { border-left-color: var(--yellow); }
-
-.svc-card .head {
-  padding: 26px 26px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-.svc-card .head .num {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  color: var(--yellow);
-  font-weight: 700;
-}
-.svc-card .head .arrow {
-  font-family: var(--mono);
-  color: var(--blue);
-  font-size: 18px;
-  opacity: 0.35;
-  transition: opacity .3s, transform .3s;
-}
-.svc-card:hover .head .arrow { opacity: 1; transform: translate(3px, -3px); }
-.svc-card .body {
-  padding: 20px 26px 28px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.svc-card h3 { font-size: 22px; color: var(--blue); margin-bottom: 6px; }
-.svc-card .sub {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  color: var(--yellow-warm);
-  text-transform: uppercase;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
-.svc-card p { font-size: 14px; line-height: 1.7; color: var(--blue); opacity: 0.78; flex: 1; }
-.svc-card .foot {
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid var(--gray);
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  color: var(--blue);
-  text-transform: uppercase;
-  display: flex;
-  justify-content: space-between;
-}
-.svc-card .foot .bar { color: var(--yellow-warm); font-weight: 700; }
-
-/* ======================= DEPOTS PREVIEW ======================= */
-.depot-band {
-  background: var(--blue);
-  color: var(--white);
-  position: relative;
-  overflow: hidden;
-}
-.depot-band::before {
-  content: "";
-  position: absolute;
-  right: -100px; bottom: -100px;
-  width: 380px; height: 380px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,216,0,0.07);
-  pointer-events: none;
-}
-.depot-band .container { position: relative; z-index: 2; }
-
-.depot-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-  margin-top: 50px;
-}
-.depot-row {
-  display: grid;
-  grid-template-columns: 56px 1fr 1fr;
-  gap: 20px;
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(255,216,0,0.1);
-  align-items: center;
-  font-family: var(--mono);
-  border-left: 3px solid transparent;
-  transition: border-left-color .25s ease, padding-left .25s ease;
-}
-.depot-row:first-child { border-top: 1px solid rgba(255,216,0,0.1); }
-.depot-row:hover { border-left-color: var(--yellow); padding-left: 14px; }
-
-.depot-num {
-  font-family: var(--display);
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--yellow);
-}
-.depot-name {
-  font-family: var(--display);
-  font-size: 20px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-}
-.depot-prov {
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  color: rgba(255,255,255,0.5);
-  text-transform: uppercase;
-}
-@media (max-width: 700px) {
-  .depot-row { grid-template-columns: 40px 1fr; }
-  .depot-row .depot-prov { grid-column: 2; }
-  .depot-row .depot-num { grid-row: span 2; }
-}
-
-/* ======== WORD PARALLAX SCROLL ======== */
-.wp-zone {
-  height: 300vh;
-  position: relative;
-}
-.wp-panel {
-  --wp-a-x: -55vw;
-  --wp-b-x: 55vw;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  background: #060915;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-/* Constructivist outlined circles behind words */
-.wp-circle {
-  position: absolute;
-  width: min(700px, 92vw);
-  height: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-.wp-words {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-.wp-word {
-  display: block;
-  font-family: var(--display);
-  font-size: clamp(72px, 13.5vw, 190px);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: -0.04em;
-  line-height: 0.9;
-  white-space: nowrap;
-  will-change: transform;
-}
-.wp-word--a {
-  color: var(--yellow);
-  transform: translateX(var(--wp-a-x));
-}
-.wp-word--b {
-  color: rgba(255,255,255,0.88);
-  transform: translateX(var(--wp-b-x));
-}
-/* Hairline axis — Constructivist precision */
-.wp-axis {
-  position: absolute;
-  left: 0; right: 0;
-  top: 50%;
-  height: 1px;
-  background: rgba(255,216,0,0.1);
-  pointer-events: none;
-  z-index: 1;
-}
-.wp-label {
-  position: absolute;
-  bottom: 52px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
-  color: rgba(255,216,0,0.3);
-  z-index: 3;
-  white-space: nowrap;
-}
-.wp-corner {
-  position: absolute;
-  width: 0; height: 0;
-  z-index: 3;
-}
-.wp-corner--tl { top: 0; left: 0; border-top: 32px solid rgba(255,216,0,0.3); border-right: 32px solid transparent; }
-.wp-corner--br { bottom: 0; right: 0; border-bottom: 32px solid rgba(255,216,0,0.12); border-left: 32px solid transparent; }
-/* ======================= SUSTAINABILITY ======================= */
-.sus-quote {
-  font-family: var(--display);
-  font-size: clamp(26px, 3.8vw, 52px);
-  line-height: 1.1;
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--blue);
-  margin: 50px 0;
-  padding-left: 28px;
-  border-left: 3px solid var(--yellow);
-}
-.sus-quote em { color: var(--yellow); font-style: normal; }
-.sus-quote .attr {
-  display: block;
-  margin-top: 22px;
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  color: var(--blue);
-  opacity: 0.5;
-  text-transform: uppercase;
-}
-
-.pillar-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1px;
-  background: var(--gray);
-}
-@media (min-width: 700px) { .pillar-grid { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1100px) { .pillar-grid { grid-template-columns: repeat(4, 1fr); } }
-
-.pillar {
-  padding: 36px 30px;
-  background: var(--paper);
-  border-left: 3px solid transparent;
-  transition: background .3s ease, border-left-color .3s ease;
-}
-.pillar:hover { background: var(--white); border-left-color: var(--yellow); }
-.pillar .pillar-val {
-  font-family: var(--display);
-  font-size: 52px;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--yellow);
-  letter-spacing: -0.02em;
-}
-.pillar h4 { margin-top: 18px; font-size: 17px; color: var(--blue); }
-.pillar p { margin-top: 12px; font-size: 13px; line-height: 1.7; color: var(--blue); opacity: 0.78; }
-</style>
-<link rel="stylesheet" href="fluid-editorial-theme.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tingi Petroleum Services supplies premium 50ppm clean fuel, bulk diesel, mobile refueling, tanks, equipment and product testing across South Africa.">
+  <title>Tingi Petroleum - Industrial Clean Fuel Supply</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/cookie-consent.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI1-Outline_wstxcj.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI1-Outline_wstxcj.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI1-Outline_wstxcj.png">
+  <link rel="manifest" href="site.webmanifest">
 </head>
-<body>
-
-<!-- ===================== HEADER ===================== -->
-<header class="site-header">
-  <div class="nav-inner">
-    <a href="index.html" class="brand" aria-label="Tingi Petroleum home">
-      <img src="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538919/TINGI-Variation-Yelllow_hwsxp3.png" alt="Tingi Petroleum Logo" style="height: 42px; width: auto;">
+<body id="top" class="home-page">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Tingi Petroleum home">
+      <img src="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538919/TINGI-Variation-Yelllow_hwsxp3.png" alt="Tingi Petroleum">
     </a>
-
-    <nav class="nav-links" aria-label="Main">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="services.html">Services</a>
-      <a href="depots.html">Depots</a>
-      <a href="sustainability.html">Sustainability</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-
-    <a href="contact.html" class="nav-cta">
-      Get a Quote
-      <span class="arrow">→</span>
-    </a>
-
-    <button class="nav-toggle" aria-label="Toggle menu">
+    <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
-  </div>
-</header>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a class="is-active" href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="depots.html">Depots</a><a href="sustainability.html">Sustainability</a>
+    </nav>
+    <a class="btn btn-small" href="contact.html">Get A Quote</a>
+  </header>
 
-<main>
-
-<!-- ===================== HERO ===================== -->
-<section class="home-hero">
-
-  <div class="hero-main">
-    <div class="hero-left">
-
-      <div class="hero-eyebrow">South Africa's Clean Fuel Provider</div>
-
-      <h1 class="hero-title">
-        <span class="line">We supply</span>
-        <span class="line">more than</span>
-        <span class="line"><span class="accent">just fuel.</span></span>
-      </h1>
-
-      <div class="hero-rotate-wrap">
-        <span class="label">[ STD ]</span>
-        <span class="rotator" data-items='["CLEAN FUEL","BULK DIESEL","YOUR SOLUTION","RELIABILITY"]'>CLEAN FUEL</span>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-bg" aria-hidden="true">
+        <video autoplay muted loop playsinline>
+          <source src="https://res.cloudinary.com/dgwtaivvf/video/upload/v1778239997/Tingi_P_Showreel_qdfrlg.mp4" type="video/mp4">
+        </video>
       </div>
+      <div class="hero-center">
+        <p class="eyebrow">FUEL SUPPLY BUILT FOR INDUSTRIAL SCALE</p>
+        <left>
+        <h1>POWERING INDUSTRIAL<br>SOUTH AFRICA</h1>
+        </left>
 
-      <p class="hero-body">
-        Tingi Petroleum is an established bulk diesel provider delivering premium <strong>50ppm clean fuel solutions</strong> across South Africa and the African continent. <strong>Sustainability is our core value.</strong>
-      </p>
-
-      <div class="hero-actions">
-        <a href="services.html" class="btn btn-yellow">Our Services <span class="arrow">→</span></a>
-        <a href="tel:+27733511918" class="btn btn-ghost">☎ 0733 511 918</a>
+        <div class="rotator" data-rotating-subtitle>CLEAN FUEL</div>
+        <a class="btn hero-cta" href="contact.html">Get A Quote</a>
+        <p class="hero-note">Premium 50ppm diesel supply for industrial, commercial, mining, logistics, and agricultural operations.</p>
       </div>
-    </div>
+    </section>
 
-    <div class="hero-right">
-      <div class="hero-geo-panel">
-        <span class="hero-tag-label">Countrywide · Delivery</span>
 
-        <!-- Constructivist ring composition -->
-        <div class="hero-ring-frame">
-          <svg class="ring-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="200" cy="200" r="196" fill="none" stroke="rgba(255,216,0,0.18)" stroke-width="1"/>
-            <circle cx="200" cy="200" r="155" fill="none" stroke="rgba(255,216,0,0.09)" stroke-width="1"/>
-            <!-- Axis marks — Constructivist precision lines -->
-            <line x1="4" y1="200" x2="56" y2="200" stroke="rgba(255,216,0,0.3)" stroke-width="1"/>
-            <line x1="344" y1="200" x2="396" y2="200" stroke="rgba(255,216,0,0.3)" stroke-width="1"/>
-            <line x1="200" y1="4" x2="200" y2="56" stroke="rgba(255,216,0,0.3)" stroke-width="1"/>
-            <line x1="200" y1="344" x2="200" y2="396" stroke="rgba(255,216,0,0.3)" stroke-width="1"/>
-            <!-- Corner triangle marks -->
-            <polygon points="0,0 36,0 0,36" fill="rgba(255,216,0,0.4)"/>
-            <polygon points="400,400 364,400 400,364" fill="rgba(255,216,0,0.2)"/>
-          </svg>
-          <div class="droplet-inner">
-            <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
-              <path d="M100 8 C100 8, 22 92, 22 175 C22 230, 56 265, 100 265 C144 265, 178 230, 178 175 C178 92, 100 8, 100 8 Z" fill="#FFD800"/>
-              <path d="M100 38 C100 38, 44 110, 44 178 C44 218, 64 247, 100 247 C100 247, 80 234, 80 200 C80 168, 100 110, 100 110 C100 110, 100 38, 100 38 Z" fill="#003366"/>
-              <path d="M88 188 C88 213, 100 230, 112 230 C100 224, 96 208, 100 188 C104 168, 124 144, 124 122 C120 142, 100 168, 88 188 Z" fill="#FFD800"/>
-              <text x="100" y="180" text-anchor="middle" fill="#FFD800" font-family="Arimo" font-weight="700" font-size="20" letter-spacing="2">TINGI</text>
-            </svg>
+    <section class="section platform" id="about">
+      <div class="section-kicker">
+        <h2>Everything you need for dependable fuel supply.</h2>
+        <p>Tingi Financial Services (Pty) Ltd, trading as Tingi Petroleum Services, was founded to bring resources, convenience, and centralisation to the diesel refuelling market.</p>
+      </div>
+      <div class="platform-grid">
+        <article class="image-card tall">
+          <div class="industrial-visual visual-yard"></div>
+          <h3>Powering Progress</h3>
+          <p>Midrand-based operations with a national depot network built for countrywide bulk diesel distribution.</p>
+          <span class="arrow">&rarr;</span>
+        </article>
+        <article class="image-card wide">
+          <div class="industrial-visual visual-fleet"></div>
+          <h3>Fueling Tomorrow</h3>
+          <p>Premium clean fuel solutions backed by an experienced management team and HSE-compliant procedures.</p>
+          <span class="arrow">&rarr;</span>
+        </article>
+        <article class="image-card dark">
+          <div class="industrial-visual visual-compliance"></div>
+          <h3>Compliance</h3>
+          <div class="badge-list"><span>CIPC Registered</span><span>B-BBEE Level 1</span><span>HSE Compliant</span><span>COIDA & UIF</span></div>
+          <span class="arrow">&rarr;</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section service-showcase" id="services">
+      <div class="section-title-center">
+        <h2>Fuel solutions for high-demand operations.</h2>
+        <p>Choose the supply model your site, fleet, or facility needs.</p>
+      </div>
+      <div class="service-tabs" role="tablist" aria-label="Service categories">
+        <button type="button" id="bulk-diesel-tab" role="tab" aria-selected="true" aria-controls="bulk-diesel-panel" class="active">Bulk Diesel</button>
+        <button type="button" id="mobile-refueling-tab" role="tab" aria-selected="false" aria-controls="mobile-refueling-panel">Mobile Refueling</button>
+        <button type="button" id="tanks-tab" role="tab" aria-selected="false" aria-controls="tanks-panel">Tanks</button>
+        <button type="button" id="testing-tab" role="tab" aria-selected="false" aria-controls="testing-panel">Testing</button>
+        <button type="button" id="contracts-tab" role="tab" aria-selected="false" aria-controls="contracts-panel">Contracts</button>
+      </div>
+      <div class="service-hero-showcase">
+        <div class="hero-image-container">
+          <div class="hero-industrial-image bulk-diesel-image">
+            <div class="image-overlay">
+              <h3>Bulk Diesel Supply</h3>
+              <p>Premium 50ppm diesel delivered nationwide to industrial operations</p>
+              <a class="btn" href="contact.html">Request Supply</a>
+            </div>
+          </div>
+          
+          <div class="hero-industrial-image mobile-refueling-image">
+            <div class="image-overlay">
+              <h3>Mobile Refueling</h3>
+              <p>On-site fuel delivery for fleet and equipment operations</p>
+              <a class="btn" href="contact.html">Schedule Service</a>
+            </div>
+          </div>
+          
+          <div class="hero-industrial-image tanks-equipment-image">
+            <div class="image-overlay">
+              <h3>Fuel Infrastructure</h3>
+              <p>Complete storage tanks and dispensing equipment solutions</p>
+              <a class="btn" href="contact.html">Infrastructure Quote</a>
+            </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="hero-data-strip">
-          <div class="data-cell">
-            <div class="k">PRODUCT</div>
-            <div class="v">50ppm</div>
+    <section class="section process-section">
+      <h2>How Tingi delivers fuel.</h2>
+      <div class="process-list">
+        <div><span>01</span><strong>Confirm your volume, grade, delivery window, and location.</strong></div>
+        <div><span>02</span><strong>Route supply from the closest available depot in the national network.</strong></div>
+        <div><span>03</span><strong>Dispatch HSE-compliant delivery units to your site or fleet.</strong></div>
+        <div><span>04</span><strong>Test product on-site and document quality before acceptance.</strong></div>
+        <div><span>05</span><strong>Maintain repeat supply schedules for ongoing industrial demand.</strong></div>
+      </div>
+    </section>
+
+    <section class="section depots" id="depots">
+      <div class="depot-intro">
+        <h2>7 depots. One countrywide supply network.</h2>
+        <a class="btn" href="contact.html">Schedule Delivery</a>
+      </div>
+      <div class="depot-board" aria-label="Depot network carousel">
+        <div class="depot-track">
+          <div class="depot-set">
+            <article><span>01</span><strong>Midrand</strong><small>Gauteng - Head Office & Primary Depot</small></article>
+            <article><span>02</span><strong>Cape Town</strong><small>Western Cape - Regional Distribution</small></article>
+            <article><span>03</span><strong>Bloemfontein</strong><small>Free State - Central South Africa</small></article>
+            <article><span>04</span><strong>Mpumalanga</strong><small>Mining & Industrial Depot</small></article>
+            <article><span>05</span><strong>Bapong</strong><small>North West Regional Depot</small></article>
+            <article><span>06</span><strong>Pietermaritzburg</strong><small>KwaZulu-Natal Depot</small></article>
+            <article><span>07</span><strong>Makhado</strong><small>Limpopo Northern Depot</small></article>
           </div>
-          <div class="data-cell">
-            <div class="k">DEPOTS</div>
-            <div class="v">07 NATIONAL</div>
-          </div>
-          <div class="data-cell">
-            <div class="k">B-BBEE</div>
-            <div class="v">LEVEL 01</div>
-          </div>
-          <div class="data-cell">
-            <div class="k">SUPPLY</div>
-            <div class="v">24 / 7</div>
-          </div>
-        </div>
+                  </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-</section>
-
-<!-- ===================== ABOUT ===================== -->
-<section>
-  <div class="container">
-    <div class="about-grid reveal">
-      <div class="col-left">
-        <span class="eyebrow dark"><span class="dot"></span>About Us</span>
-        <h2 style="margin-top: 22px;">Powering progress.<br><em>Fueling tomorrow.</em></h2>
+    <section class="section sustainability" id="sustainability">
+      <div class="sustain-copy">
+        <p class="eyebrow">Sustainability</p>
+        <h2>Sustainability is our core value.</h2>
+        <p>Our vision for the fuel industry is fused with the world's vision: balancing energy security and affordability with environmental responsibility and socio-economic development.</p>
       </div>
-      <div class="body">
-        <p>
-          <strong>Tingi Financial Services (Pty) Ltd</strong>, trading as Tingi Petroleum Services, is a South African fuel solution company founded to address the lack of resources, convenience, and centralisation in the diesel refuelling market.
-        </p>
-        <p>
-          Our business office is in <strong>Midrand, Johannesburg</strong>, and we deliver premium clean fuel solutions across South Africa and the African continent — backed by a dedicated management team with over <strong>6 years of industry expertise</strong>.
-        </p>
-        <a href="about.html" class="btn btn-outline" style="margin-top: 14px;">More About Us <span class="arrow">→</span></a>
+      <div class="sustain-cards">
+        <article><strong>50ppm</strong><h3>Clean Fuel Economy</h3><p>Promoting cleaner alternative fuel through premium low-sulphur diesel.</p></article>
+        <article><strong>Balanced</strong><h3>Energy Security</h3><p>Reliable supply with a practical responsibility to communities and industry.</p></article>
+        <article><strong>Youth</strong><h3>Job Creation</h3><p>Building sustainable employment across depot operations and delivery networks.</p></article>
       </div>
-    </div>
+    </section>
 
-    <div class="compliance-strip reveal">
-      <div class="comply">
-        <span class="code">/ 01</span>
-        <h4>CIPC Registered</h4>
-        <p>Companies &amp; IP Commission</p>
-      </div>
-      <div class="comply">
-        <span class="code">/ 02</span>
-        <h4>B-BBEE Level 1</h4>
-        <p>Broad-Based BEE</p>
-      </div>
-      <div class="comply">
-        <span class="code">/ 03</span>
-        <h4>HSE Compliant</h4>
-        <p>Health, Safety &amp; Environment</p>
-      </div>
-      <div class="comply">
-        <span class="code">/ 04</span>
-        <h4>COIDA &amp; UIF</h4>
-        <p>Labour Compliant</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== STATS ===================== -->
-<section class="bg-blue">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow dark"><span class="dot"></span>By The Numbers</span>
-      <h2>Tingi Petroleum<br>at a glance.</h2>
-    </div>
-
-    <div class="stat-grid reveal">
-      <div class="stat">
-        <span class="corner">/01</span>
-        <div class="num">07</div>
-        <div class="lbl">National Depots</div>
-        <div class="sub">Across South Africa</div>
-      </div>
-      <div class="stat">
-        <span class="corner">/02</span>
-        <div class="num">06+</div>
-        <div class="lbl">Years Experience</div>
-        <div class="sub">Fuel Industry</div>
-      </div>
-      <div class="stat">
-        <span class="corner">/03</span>
-        <div class="num">50<span style="font-size: 0.5em;">ppm</span></div>
-        <div class="lbl">Diesel Grade</div>
-        <div class="sub">Premium Clean Fuel</div>
-      </div>
-      <div class="stat">
-        <span class="corner">/04</span>
-        <div class="num">01</div>
-        <div class="lbl">B-BBEE Level</div>
-        <div class="sub">Accreditation</div>
-      </div>
-      <div class="stat">
-        <span class="corner">/05</span>
-        <div class="num">100<span style="font-size: 0.5em;">%</span></div>
-        <div class="lbl">HSE Compliant</div>
-        <div class="sub">All Operations</div>
-      </div>
-      <div class="stat">
-        <span class="corner">/06</span>
-        <div class="num">24/7</div>
-        <div class="lbl">Supply Capability</div>
-        <div class="sub">On-Demand Delivery</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ======= WORD PARALLAX ======= -->
-<div class="wp-zone" aria-hidden="true">
-  <div class="wp-panel" id="wp-panel">
-
-    <!-- Constructivist circle geometry -->
-    <svg class="wp-circle" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="300" cy="300" r="296" fill="none" stroke="rgba(255,216,0,0.07)" stroke-width="1"/>
-      <circle cx="300" cy="300" r="210" fill="none" stroke="rgba(255,216,0,0.05)" stroke-width="1"/>
-      <circle cx="300" cy="300" r="110" fill="none" stroke="rgba(255,216,0,0.04)" stroke-width="1"/>
-      <!-- Axis marks -->
-      <line x1="0" y1="300" x2="80" y2="300" stroke="rgba(255,216,0,0.18)" stroke-width="1"/>
-      <line x1="520" y1="300" x2="600" y2="300" stroke="rgba(255,216,0,0.18)" stroke-width="1"/>
-      <line x1="300" y1="0" x2="300" y2="80" stroke="rgba(255,216,0,0.18)" stroke-width="1"/>
-      <line x1="300" y1="520" x2="300" y2="600" stroke="rgba(255,216,0,0.18)" stroke-width="1"/>
-    </svg>
-
-    <div class="wp-axis"></div>
-    <div class="wp-corner wp-corner--tl"></div>
-    <div class="wp-corner wp-corner--br"></div>
-
-    <div class="wp-words">
-      <span class="wp-word wp-word--a">CLEAN</span>
-      <span class="wp-word wp-word--b">FUEL</span>
-    </div>
-
-    <div class="wp-label">50ppm · South Africa · Countrywide</div>
-  </div>
-</div>
-
-<!-- ======= SCROLL MOTION SHOWCASE ======= -->
-<section class="motion-lab" aria-label="Tingi Petroleum scroll story">
-  <div class="motion-grid" aria-hidden="true"></div>
-  <div class="container">
-    <div class="motion-kicker">Scroll System / Fuel Logistics</div>
-
-    <div class="scroll-highlight" data-scroll-words>
-      Premium 50ppm diesel moves through Tingi Petroleum's national depot network with planned supply, verified quality, mobile refueling, and a cleaner fuel commitment built for commercial operators across South Africa.
-    </div>
-
-    <div class="flyin-words" data-flyin-words>
-      Countrywide delivery for fleets, farms, generators, mines, depots, and industrial sites that cannot afford downtime.
-    </div>
-  </div>
-</section>
-
-<section class="motion-sticky">
-  <div class="container motion-sticky-grid">
-    <div class="motion-sticky-copy" id="motion-sticky-copy">
-      <span class="eyebrow dark"><span class="dot"></span>Operational Promise</span>
-      <h2>Fuel supply that stays in motion.</h2>
-    </div>
-
-    <div class="motion-card-stack">
-      <article class="motion-card">
-        <span>/ 01</span>
-        <h3>Quality Verified</h3>
-        <p>Every bulk delivery is supported by product testing and premium low-sulphur 50ppm diesel standards.</p>
-      </article>
-      <article class="motion-card">
-        <span>/ 02</span>
-        <h3>Delivery Planned</h3>
-        <p>Seven national depots help reduce delays and keep your fuel supply close to where the work happens.</p>
-      </article>
-      <article class="motion-card">
-        <span>/ 03</span>
-        <h3>Downtime Reduced</h3>
-        <p>Mobile refueling brings diesel to vehicles, equipment, and generators without pulling operations off schedule.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="motion-timeline" aria-label="Fuel delivery process">
-  <div class="container">
-    <svg class="motion-rail" viewBox="0 0 360 350" role="img" aria-labelledby="rail-title">
-      <title id="rail-title">Tingi Petroleum delivery process</title>
-      <line x1="56" y1="52" x2="56" y2="298" class="rail-base" />
-      <line x1="56" y1="52" x2="56" y2="52" class="rail-active" id="motion-rail-active" />
-
-      <circle id="motion-dot-1" class="rail-dot" cx="56" cy="52" r="11" />
-      <text id="motion-text-1" class="rail-text" x="86" y="58">Order Scheduled</text>
-
-      <circle id="motion-dot-2" class="rail-dot" cx="56" cy="175" r="11" />
-      <text id="motion-text-2" class="rail-text" x="86" y="181">Fuel Tested</text>
-
-      <circle id="motion-dot-3" class="rail-dot" cx="56" cy="298" r="11" />
-      <text id="motion-text-3" class="rail-text" x="86" y="304">Site Delivered</text>
-    </svg>
-  </div>
-</section>
-
-<section class="split-scroll" aria-label="Fuel delivery comparison">
-  <div class="split-stage" id="split-stage">
-    <div class="split-row split-row-top" id="split-top">
-      <div class="split-panel split-panel-blue">
-        <span>Before Tingi</span>
-        <strong>Scattered supply, idle fleets, uncertain quality.</strong>
-      </div>
-      <div class="split-panel split-panel-yellow">
-        <span>With Tingi</span>
-        <strong>Verified fuel, planned delivery, operational flow.</strong>
-      </div>
-    </div>
-    <div class="split-row split-row-bottom" id="split-bottom">
-      <div class="split-panel split-panel-yellow">
-        <span>With Tingi</span>
-        <strong>Seven depots serving countrywide demand.</strong>
-      </div>
-      <div class="split-panel split-panel-blue">
-        <span>Before Tingi</span>
-        <strong>More calls, more waiting, more downtime.</strong>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="mask-badge-section" aria-label="Clean fuel badge">
-  <div class="scroll-badge" id="scroll-badge">
-    <div class="badge-clip">50ppm</div>
-    <div class="badge-bg badge-bg-one"></div>
-    <div class="badge-bg badge-bg-two"></div>
-  </div>
-</section>
-
-<!-- ===================== VALUES ===================== -->
-<section>
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow dark"><span class="dot"></span>Brand Values</span>
-      <h2>Built on four<br>operational <em>standards.</em></h2>
-    </div>
-  </div>
-
-  <div class="container reveal">
-    <div class="values-grid">
-      <div class="value-cell">
-        <span class="v-num">/ 01</span>
-        <h3>Reliability</h3>
-        <p>You receive your bulk diesel order where you want it, when you need it — guaranteed. Our network covers South Africa countrywide.</p>
-      </div>
-      <div class="value-cell">
-        <span class="v-num">/ 02</span>
-        <h3>Excellence</h3>
-        <p>Impeccable service delivery and customer-oriented services driven by innovation, communication, and effective business administration.</p>
-      </div>
-      <div class="value-cell">
-        <span class="v-num">/ 03</span>
-        <h3>Sustainability</h3>
-        <p>Balancing energy security and affordability with environmental responsibility and socio-economic development — it's our core value.</p>
-      </div>
-      <div class="value-cell">
-        <span class="v-num">/ 04</span>
-        <h3>Innovation</h3>
-        <p>Constant investment in our team through OHS training, management development, and technological advancement in fuel delivery solutions.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== SERVICES PREVIEW ===================== -->
-<section>
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow dark"><span class="dot"></span>What We Do</span>
-      <h2>Our <em>services.</em></h2>
-      <p class="lede">Complete fuel solutions for the industrial and commercial market — delivered where you need it, when you need it.</p>
-    </div>
-
-    <div class="svc-grid reveal">
-
-      <a href="services.html" class="svc-card">
-        <div class="head">
-          <span class="num">/ 01</span>
-          <span class="arrow">↗</span>
-        </div>
-        <div class="body">
-          <h3>Bulk Diesel</h3>
-          <div class="sub">Premium 50ppm Clean Fuel</div>
-          <p>We supply premium quality 50ppm diesel directly to your site — industrial, commercial, or agricultural. Every order comes with on-site product testing.</p>
-          <div class="foot">
-            <span>BULK</span>
-            <span class="bar">50ppm</span>
+    <section class="section contact" id="contact">
+      <div class="contact-layout">
+        <div>
+          <p class="eyebrow">Get In Touch</p>
+          <h2>Contact us, and get pumped.</h2>
+          <p>Ready to order bulk diesel or discuss a fuel supply contract? Our team is standing by.</p>
+          <div class="support-cards">
+            <article><h3>Head Office</h3><p>546 16th Road, Randjespark, Midrand, 1685, Johannesburg</p><span>&rarr;</span></article>
+            <article><h3>Emergency Supply</h3><p>24 / 7 available for urgent fuel demand and on-demand delivery.</p><span>&rarr;</span></article>
           </div>
         </div>
-      </a>
+        <form class="quote-form" action="mailto:nkantingi@yahoo.com" method="post" enctype="text/plain">
+          <h3>Request A Quote</h3>
+          <label>Full Name<input type="text" name="Full Name" required></label>
+          <label>Company<input type="text" name="Company"></label>
+          <label>Email Address<input type="email" name="Email" required></label>
+          <label>Service Required<select name="Service Required"><option>Bulk Diesel - 50ppm</option><option>Mobile Refueling</option><option>Tanks & Equipment</option><option>Product Testing</option><option>Other Enquiry</option></select></label>
+          <label>Message<textarea name="Message" rows="5" placeholder="Describe fuel requirements, volume, location, and timing."></textarea></label>
+          <button class="btn" type="submit">Send Enquiry</button>
+        </form>
+      </div>
+    </section>
+  </main>
 
-      <a href="services.html" class="svc-card">
-        <div class="head">
-          <span class="num">/ 02</span>
-          <span class="arrow">↗</span>
-        </div>
-        <div class="body">
-          <h3>Mobile Refueling</h3>
-          <div class="sub">Browser &amp; On-Site Deliveries</div>
-          <p>Our mobile refueling service brings the fuel to your fleet — wherever it's operating. Browser deliveries ensure your vehicles, machinery, and generators are refuelled with zero downtime.</p>
-          <div class="foot">
-            <span>MOBILE</span>
-            <span class="bar">ZERO DOWNTIME</span>
-          </div>
-        </div>
-      </a>
-
-      <a href="services.html" class="svc-card">
-        <div class="head">
-          <span class="num">/ 03</span>
-          <span class="arrow">↗</span>
-        </div>
-        <div class="body">
-          <h3>Tanks &amp; Equipment</h3>
-          <div class="sub">Supply &amp; Installation</div>
-          <p>Tingi Petroleum supplies and installs established storage tanks and dispensing equipment — providing a complete, end-to-end fuel infrastructure solution.</p>
-          <div class="foot">
-            <span>INFRA</span>
-            <span class="bar">END-TO-END</span>
-          </div>
-        </div>
-      </a>
-
-      <a href="services.html" class="svc-card">
-        <div class="head">
-          <span class="num">/ 04</span>
-          <span class="arrow">↗</span>
-        </div>
-        <div class="body">
-          <h3>Product Testing</h3>
-          <div class="sub">Quality Assurance</div>
-          <p>We don't just deliver — we verify. Tingi Petroleum conducts rigorous on-site product testing for every bulk delivery, ensuring you receive certified, clean, premium 50ppm diesel.</p>
-          <div class="foot">
-            <span>QA</span>
-            <span class="bar">VERIFIED</span>
-          </div>
-        </div>
-      </a>
-
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div>
+        <img src="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI1-Outline_wstxcj.png" alt="Tingi Petroleum">
+        <p>South Africa's leading clean fuel provider. We supply more than just fuel - sustainability is our core value.</p>
+        <p><a href="tel:+27733511918">0733 511 918</a><br><a href="mailto:nkantingi@yahoo.com">nkantingi@yahoo.com</a></p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <div><h3>Company</h3><a href="about.html">About Us</a><a href="sustainability.html">Our Vision</a><a href="about.html#compliance">Compliance</a></div>
+        <div><h3>Services</h3><a href="services.html#bulk">Bulk Diesel</a><a href="services.html#mobile">Mobile Refueling</a><a href="services.html#equipment">Tanks & Equipment</a></div>
+        <div><h3>Depots</h3><a href="depots.html#midrand">Midrand</a><a href="depots.html#cape-town">Cape Town</a><a href="depots.html#makhado">Makhado</a></div>
+        <div><h3>Connect</h3><a href="tel:+27733511918">0733 511 918</a><a href="mailto:nkantingi@yahoo.com">nkantingi@yahoo.com</a><a href="contact.html">Get A Quote</a></div>
+      </nav>
     </div>
-  </div>
-</section>
+    <div class="footer-bottom"><span>© 2026 Tingi Financial Services (Pty) Ltd. Trading as Tingi Petroleum Services. This website was developed by Occxlnce.</span></div>
+  </footer>
 
-<!-- ===================== DEPOTS ===================== -->
-<section class="depot-band">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow dark"><span class="dot"></span>National Footprint</span>
-      <h2 style="color: var(--white);">Our <em>depots.</em></h2>
-      <p class="lede" style="color: rgba(255,255,255,0.7);">7 strategically located depots across South Africa ensure we deliver your bulk diesel order wherever you need it, guaranteed.</p>
-    </div>
-
-    <div class="depot-list reveal">
-      <div class="depot-row">
-        <div class="depot-num">01</div>
-        <div class="depot-name">Midrand</div>
-        <div class="depot-prov">Gauteng · HQ</div>
-      </div>
-      <div class="depot-row">
-        <div class="depot-num">02</div>
-        <div class="depot-name">Cape Town</div>
-        <div class="depot-prov">Western Cape</div>
-      </div>
-      <div class="depot-row">
-        <div class="depot-num">03</div>
-        <div class="depot-name">Bloemfontein</div>
-        <div class="depot-prov">Free State</div>
-      </div>
-      <div class="depot-row">
-        <div class="depot-num">04</div>
-        <div class="depot-name">Mpumalanga</div>
-        <div class="depot-prov">Mpumalanga</div>
-      </div>
-      <div class="depot-row">
-        <div class="depot-num">05</div>
-        <div class="depot-name">Bapong</div>
-        <div class="depot-prov">North West</div>
-      </div>
-      <div class="depot-row">
-        <div class="depot-num">06</div>
-        <div class="depot-name">Pietermaritzburg</div>
-        <div class="depot-prov">KwaZulu-Natal</div>
-      </div>
-      <div class="depot-row">
-        <div class="depot-num">07</div>
-        <div class="depot-name">Makhado</div>
-        <div class="depot-prov">Limpopo</div>
-      </div>
-    </div>
-
-    <div style="margin-top: 50px; display: flex; gap: 14px; flex-wrap: wrap;">
-      <a href="depots.html" class="btn btn-yellow">View All Depots <span class="arrow">→</span></a>
-      <a href="contact.html" class="btn btn-ghost">Request Delivery <span class="arrow">→</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== SUSTAINABILITY ===================== -->
-<section>
-  <div class="container">
-    <div class="section-head reveal" style="max-width: 880px;">
-      <span class="eyebrow dark"><span class="dot"></span>Sustainability</span>
-      <h2>Sustainability is<br>our <em>core value.</em></h2>
-    </div>
-
-    <div class="reveal" style="display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start;">
-      <div style="display: grid; grid-template-columns: 1fr; gap: 30px;">
-        <p style="font-size: 17px; line-height: 1.8; color: var(--blue); max-width: 880px;">
-          Our vision for the fuel industry is fused with the world's vision — we are not only focused on providing fuel, but on creating a low-carbon economy that balances energy security and affordability with environmental responsibility and socio-economic development.
-        </p>
-        <p style="font-size: 17px; line-height: 1.8; color: var(--blue); max-width: 880px;">
-          We are committed to promoting cleaner alternative fuel economies while creating sustainable jobs and addressing energy poverty — ensuring a reliable supply of affordable energy for South Africa's growing population.
-        </p>
-
-        <blockquote class="sus-quote">
-          "We supply more than just <em>fuel</em> — sustainability is our core value."
-          <span class="attr">— Tingi Petroleum Mission</span>
-        </blockquote>
-      </div>
-    </div>
-
-    <div class="pillar-grid reveal">
-      <div class="pillar">
-        <div class="pillar-val">50ppm</div>
-        <h4>Clean Fuel Economy</h4>
-        <p>Promoting cleaner alternative fuel through premium 50ppm low-sulphur diesel, reducing emissions across industry and transport.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-val">Bal.</div>
-        <h4>Energy Security</h4>
-        <p>Balancing energy security and affordability with environmental responsibility — our vision fused with the world's.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-val">Youth</div>
-        <h4>Job Creation</h4>
-        <p>Creating sustainable employment and youth empowerment opportunities across our national depot network and operations.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-val">Acc.</div>
-        <h4>Energy Poverty</h4>
-        <p>Committed to addressing energy poverty by providing reliable, affordable fuel solutions to communities across South Africa.</p>
-      </div>
-    </div>
-
-    <div style="margin-top: 50px; display: flex; gap: 14px; flex-wrap: wrap;">
-      <a href="sustainability.html" class="btn btn-blue">Read Our ESG Commitment <span class="arrow">→</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== CTA BAND ===================== -->
-<section class="cta-band">
-  <div class="container">
-    <div>
-      <span class="eyebrow dark"><span class="dot"></span>Get In Touch</span>
-      <h2 style="margin-top: 22px;">Contact us, and<br>get pumped.</h2>
-      <p>Ready to order bulk diesel or discuss a fuel supply contract? Our team is standing by — countrywide delivery, guaranteed.</p>
-    </div>
-    <div class="actions">
-      <a href="contact.html" class="btn btn-yellow">Request a Quote <span class="arrow">→</span></a>
-      <a href="tel:+27733511918" class="btn btn-ghost">☎ 0733 511 918</a>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<!-- ===================== FOOTER ===================== -->
-<footer class="site-footer">
-  <div class="footer-top">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="name">TINGI</div>
-          <div class="sub">PETROLEUM</div>
-          <p>South Africa's leading clean fuel provider. We supply more than just fuel — sustainability is our core value.</p>
-          <div style="margin-top: 22px; display: flex; flex-direction: column; gap: 6px; font-family: var(--mono); font-size: 13px;">
-            <a href="tel:+27733511918" style="color: var(--yellow);">☎ 0733 511 918</a>
-            <a href="mailto:nkantingi@yahoo.com" style="color: rgba(255,255,255,0.6);">@ nkantingi@yahoo.com</a>
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h5>Company</h5>
-          <ul>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="about.html#mission">Our Mission</a></li>
-            <li><a href="about.html#vision">Our Vision</a></li>
-            <li><a href="about.html#values">Our Values</a></li>
-            <li><a href="about.html#compliance">Compliance</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h5>Services</h5>
-          <ul>
-            <li><a href="services.html">Bulk Diesel</a></li>
-            <li><a href="services.html">Mobile Refueling</a></li>
-            <li><a href="services.html">Tanks &amp; Equipment</a></li>
-            <li><a href="services.html">Product Testing</a></li>
-            <li><a href="contact.html">Get a Quote</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h5>Depots</h5>
-          <ul>
-            <li><a href="depots.html">Midrand (HQ)</a></li>
-            <li><a href="depots.html">Cape Town</a></li>
-            <li><a href="depots.html">Bloemfontein</a></li>
-            <li><a href="depots.html">Mpumalanga</a></li>
-            <li><a href="depots.html">More Locations</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h5>Sustainability</h5>
-          <ul>
-            <li><a href="sustainability.html">Clean Fuel Vision</a></li>
-            <li><a href="sustainability.html">Low-Carbon Economy</a></li>
-            <li><a href="sustainability.html">Job Creation</a></li>
-            <li><a href="sustainability.html">Energy Poverty</a></li>
-            <li><a href="sustainability.html">ESG Commitment</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div style="margin-top: 60px; padding-top: 28px; border-top: 1px solid rgba(255,216,0,0.1); display: flex; gap: 10px; flex-wrap: wrap;">
-        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.55); text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(255,216,0,0.2);">CIPC REGISTERED</span>
-        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.55); text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(255,216,0,0.2);">B-BBEE LEVEL 1</span>
-        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.55); text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(255,216,0,0.2);">HSE COMPLIANT</span>
-        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.55); text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(255,216,0,0.2);">COIDA</span>
-        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.55); text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(255,216,0,0.2);">UIF</span>
-        <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,216,0,0.55); text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(255,216,0,0.2);">SARS</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="footer-bottom">
-      <span>© 2026 Tingi Financial Services (Pty) Ltd · Trading as Tingi Petroleum Services</span>
-      <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: rgba(255,255,255,0.3);">Website by Occxlnce</span>
-    </div>
-  </div>
-</footer>
-
-<script src="main.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/cookie-consent.js"></script>
 </body>
 </html>
