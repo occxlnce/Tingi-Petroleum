@@ -10,8 +10,20 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
-body { font-family: "Inter", sans-serif; background: var(--offwhite); color: var(--blue); padding-top: 60px; }
+html, body {
+  overflow-x: hidden;
+}
+html { 
+  scroll-behavior: smooth; 
+  font-size: 16px; 
+}
+body { 
+  font-family: "Inter", sans-serif; 
+  background: var(--offwhite); 
+  color: var(--blue); 
+  padding-top: 60px; 
+  min-height: 100vh; 
+}
 
 #nav {
   position: fixed; top: 0; left: 0; right: 0; height: 60px; z-index: 100;
@@ -43,17 +55,30 @@ main section { padding: 88px 48px; }
   object-fit: cover;
   z-index: 0;
   opacity: 0.4;
-  background: url('https://res.cloudinary.com/dgwtaivvf/image/upload/v1777539021/Workers_reviewing_data_at_twilight_xt6qph.png') center/cover no-repeat;
+  background-image: url('https://res.cloudinary.com/dgwtaivvf/image/upload/v1777539021/Workers_reviewing_data_at_twilight_xt6qph.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 /* Services page specific hero background */
 .services-page .hero-video {
-  background: url('https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538993/Worker_moving_TINGI_PETROLEUM_barrel_iqb1t8.png') center/cover no-repeat;
+  background-image: url('https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538993/Worker_moving_TINGI_PETROLEUM_barrel_iqb1t8.png');
 }
 
 /* Depots page specific hero background */
 .depots-page .hero-video {
-  background: url('https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538993/Worker_moving_TINGI_PETROLEUM_barrel_iqb1t8.png') center/cover no-repeat;
+  background-image: url('depots-hero.png');
+}
+
+/* Sustainability page specific hero background */
+.sustainability-page .hero-video {
+  background-image: url('sustainability-hero.png');
+}
+
+/* Quote page specific hero background */
+.quote-page .hero-video {
+  background-image: url('quote-hero.png');
 }
 
 .hero-inner { 
@@ -112,7 +137,7 @@ p { color: var(--muted); line-height: 1.7; }
 .card-stat {
   border-radius: 16px;
   padding: 18px;
-  background: #003366);
+  background: #003366;
   color: var(--white);
   border: 1px solid rgba(255, 255, 255, .08);
 }
@@ -214,162 +239,12 @@ p { color: var(--muted); line-height: 1.7; }
 }
 
 .icon-list { list-style: none; display: grid; gap: 10px; }
-.icon-list li { display: flex; gap: 10px; align-items: flex-start; color: #ffffff); }
+.icon-list li { display: flex; gap: 10px; align-items: flex-start; color: #003366; }
 .icon-list i { color: var(--blue); width: 18px; margin-top: 3px; }
 
-.cookie { margin-top: 20px; border-top: 1px solid var(--rule); padding-top: 14px; cursor: pointer; transition: opacity 0.3s ease; }
-.cookie:hover { opacity: 0.8; }
-.cookie-actions { display: flex; gap: 10px; margin-top: 10px; }
-
-/* Cookie Modal Styles */
-.cookie-modal-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 51, 102, 0.9);
-  backdrop-filter: blur(8px);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.cookie-modal-overlay.active {
-  opacity: 1;
-}
-
-.cookie-modal-overlay.hiding {
-  opacity: 0;
-}
-
-.cookie-modal {
-  background: var(--blue);
-  border: 2px solid var(--yellow);
-  border-radius: 8px;
-  max-width: 500px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  transform: scale(0.9);
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.cookie-modal-overlay.active .cookie-modal {
-  transform: scale(1);
-}
-
-.cookie-modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 24px 24px 16px;
-  border-bottom: 1px solid rgba(255, 216, 0, 0.2);
-}
-
-.cookie-modal-header h3 {
-  font-family: var(--display);
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--white);
-  margin: 0;
-}
-
-.cookie-modal-close {
-  background: none;
-  border: none;
-  color: var(--yellow);
-  font-size: 24px;
-  cursor: pointer;
-  padding: 0;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  transition: background 0.2s ease;
-}
-
-.cookie-modal-close:hover {
-  background: rgba(255, 216, 0, 0.1);
-}
-
-.cookie-modal-body {
-  padding: 24px;
-}
-
-.cookie-modal-body p {
-  color: rgba(242, 242, 242, 0.9);
-  line-height: 1.6;
-  margin-bottom: 24px;
-}
-
-.cookie-options {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.cookie-option {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  cursor: pointer;
-  padding: 16px;
-  border: 1px solid rgba(255, 216, 0, 0.2);
-  border-radius: 6px;
-  transition: all 0.2s ease;
-}
-
-.cookie-option:hover {
-  border-color: var(--yellow);
-  background: rgba(255, 216, 0, 0.05);
-}
-
-.cookie-option input[type="radio"] {
-  margin: 4px 0 0 0;
-  accent-color: var(--yellow);
-}
-
-.cookie-option span {
-  font-family: var(--display);
-  font-weight: 600;
-  color: var(--white);
-  font-size: 16px;
-}
-
-.cookie-option small {
-  display: block;
-  color: rgba(242, 242, 242, 0.7);
-  font-size: 12px;
-  margin-top: 4px;
-  font-family: var(--mono);
-  letter-spacing: 0.1em;
-}
-
-.cookie-modal-actions {
-  display: flex;
-  gap: 12px;
-  padding: 0 24px 24px;
-}
-
 @media (max-width: 600px) {
-  .cookie-modal {
-    width: 95%;
-    margin: 20px;
-  }
-  
-  .cookie-modal-header,
-  .cookie-modal-body,
-  .cookie-modal-actions {
-    padding: 20px;
-  }
-  
-  .cookie-modal-actions {
-    flex-direction: column;
-  }
+  .btn { height: 44px; padding: 0 20px; font-size: 12px; }
+  .cta-row { flex-direction: column; }
 }
 
 footer { background: #ffd800; padding: 48px; color: var(--white); }
@@ -457,9 +332,6 @@ textarea { min-height: 110px; resize: vertical; }
   
   .btn { height: 44px; padding: 0 20px; font-size: 12px; }
   .cta-row { flex-direction: column; }
-  
-  .cookie-modal { width: 95%; margin: 16px; }
-  .cookie-modal-header, .cookie-modal-body, .cookie-modal-actions { padding: 16px; }
 }
 
 /* iPhone 11 (414px) */
