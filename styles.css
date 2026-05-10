@@ -319,7 +319,7 @@ textarea { min-height: 110px; resize: vertical; }
 @media (max-width: 375px) {
   #nav { padding: 0 12px; }
   .nav-logo img { height: 36px; }
-  .nav-cta { font-size: 10px; padding: 0 12px; height: 34px; }
+  .nav-cta { display: none; }
   .nav-links { display: none; }
   .nav-toggle { display: block; }
   
@@ -352,6 +352,7 @@ textarea { min-height: 110px; resize: vertical; }
 /* iPhone 11 (414px) */
 @media (min-width: 376px) and (max-width: 414px) {
   #nav { padding: 0 16px; }
+  .nav-cta { display: none; }
   .nav-links { display: none; }
   .nav-toggle { display: block; }
   
@@ -375,6 +376,7 @@ textarea { min-height: 110px; resize: vertical; }
 /* iPhone 16 (430px) */
 @media (min-width: 415px) and (max-width: 430px) {
   #nav { padding: 0 20px; }
+  .nav-cta { display: none; }
   .nav-links { display: none; }
   .nav-toggle { display: block; }
   
