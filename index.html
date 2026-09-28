@@ -1,651 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 — Lost in the System | Occxlnce</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Three.js for 3D Background -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- GSAP for smooth animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            overflow-x: hidden;
-            background-color: #b52117;
-            color: #fff;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tingi Petroleum | Premium 50ppm Diesel Supplier South Africa</title>
+  <meta name="description" content="Tingi Petroleum is South Africa's leading fuel supplier. We provide premium 50ppm bulk diesel, mobile refueling, and fuel infrastructure solutions across 7 national depots.">
+  <meta name="keywords" content="Tingi Petroleum, tingi, diesel supplier South Africa, 50ppm diesel, bulk diesel supply, fuel supplier, mobile refueling, petroleum, fuel logistics">
+  <meta name="author" content="Tingi Financial Services (Pty) Ltd">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tingipetroleum.co.za/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tingi Petroleum | Premium 50ppm Diesel Supplier South Africa">
+  <meta property="og:description" content="South Africa's leading fuel supplier. Premium 50ppm bulk diesel, mobile refueling, and fuel infrastructure solutions across 7 national depots.">
+  <meta property="og:url" content="https://tingipetroleum.co.za/">
+  <meta property="og:site_name" content="Tingi Petroleum">
+  <meta property="og:image" content="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI-Variation2_gpwqii.png">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tingi Petroleum | Premium 50ppm Diesel Supplier South Africa">
+  <meta name="twitter:description" content="South Africa's leading fuel supplier. Premium 50ppm bulk diesel, mobile refueling, and fuel infrastructure solutions across 7 national depots.">
+  <meta name="twitter:image" content="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI-Variation2_gpwqii.png">
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538919/TINGI-Symbol_kpe2rj.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Tingi Petroleum",
+    "alternateName": "Tingi Financial Services (Pty) Ltd",
+    "url": "https://tingipetroleum.co.za",
+    "logo": "https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI-Variation2_gpwqii.png",
+    "description": "South Africa's leading fuel supplier providing premium 50ppm bulk diesel, mobile refueling, and fuel infrastructure solutions across 7 national depots.",
+    "telephone": "+27733511918",
+    "email": "nkantingi@yahoo.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "546 16th Road, Randjespark",
+      "addressLocality": "Midrand",
+      "postalCode": "1685",
+      "addressRegion": "Gauteng",
+      "addressCountry": "ZA"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "South Africa"
+    },
+    "sameAs": [],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Fuel Supply Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Bulk Diesel Supply",
+            "description": "Premium 50ppm diesel delivered nationwide to industrial operations"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Mobile Refueling",
+            "description": "On-site fuel delivery for fleet and equipment operations"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Fuel Storage Tanks",
+            "description": "Storage and dispensing equipment for operational fuel security"
+          }
         }
-        
-        #canvas-container::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            opacity: .17;
-            mix-blend-mode: multiply;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.87' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
-        }
-        #canvas-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100dvh;
-            z-index: -1;
-            overflow: hidden;
-            isolation: isolate;
-        }
-
-        main { min-height: 100svh; box-sizing: border-box; padding-top: 150px; padding-bottom: 72px; }
-        @media(max-width: 767px) {
-            header { padding: 22px 20px !important; gap: 10px; }
-            header .text-2xl { font-size: clamp(1.05rem, 5vw, 1.5rem); }
-            header .gap-8 { gap: 12px; }
-            main { min-height: 100svh; margin-top: 0 !important; padding: 155px 22px 44px !important; justify-content: center; }
-            main h1 { font-size: clamp(3.25rem, 12.5vw, 5.5rem) !important; line-height: .91; overflow-wrap: normal; }
-            main .max-w-3xl { max-width: 100%; }
-            main .max-w-3xl > .absolute { top: -120px; }
-            main p.text-lg { font-size: clamp(.95rem, 4vw, 1.125rem); max-width: 19rem; }
-            main button { padding: 10px 17px !important; font-size: 10px !important; }
-        }
-        @media(max-width: 375px) { main { padding-top: 168px !important; } main h1 { font-size: 12vw !important; } }
-        @media(min-width:768px) and (max-width:1023px) { main { padding-top: 170px; } main h1 { font-size: clamp(5.5rem, 10vw, 8rem) !important; } }
-        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
-        /* 404 typography and responsive spacing */
-        .error-dot { color: #fff; }
-        .error-subhead { display: inline-block; font-size: .53em; line-height: 1.04; letter-spacing: -.065em; vertical-align: top; }
-        main h1 { line-height: .88 !important; letter-spacing: -.085em; }
-        main .max-w-3xl { max-width: 900px; }
-        @media(max-width:767px) {
-          main { padding-top: 210px !important; padding-bottom: 60px !important; }
-          main h1 { font-size: clamp(5.8rem, 28vw, 9rem) !important; line-height: .89 !important; margin-bottom: 26px !important; }
-          .error-subhead { font-size: .40em; letter-spacing: -.065em; }
-          main p.text-lg { max-width: 17rem; line-height: 1.4; }
-          main a.glass-panel { padding: 11px 18px !important; font-size: 11px !important; }
-        }
-        @media(max-width:375px) { main h1 { font-size: 26vw !important; } }
-        /* Custom scrollbar for webkit */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #111; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #ff331f; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #cc2918; 
-        }
-
-        .glass-panel {
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .text-shadow {
-            text-shadow: 0px 4px 20px rgba(0,0,0,0.5);
-        }
-        
-        .card-gradient {
-            background: linear-gradient(180deg, rgba(20,20,20,0) 0%, rgba(0,0,0,0.8) 100%);
-        }
-
-        /* Prevent text selection on ui elements */
-        .no-select {
-            user-select: none;
-            -webkit-user-select: none;
-        }
-    </style>
+      ]
+    }
+  }
+  </script>
 </head>
-<body class="antialiased min-h-screen flex flex-col justify-between">
+<body>
+  <nav id="nav">
+    <a href="index.html" class="nav-logo"><img src="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI-Variation2_gpwqii.png" alt="Tingi Petroleum Logo" style="height: 42px; width: auto;"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="depots.html">Depots</a></li><li><a href="sustainability.html">Sustainability</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <a class="nav-cta" href="quote.html"><i class="fa-solid fa-file-signature"></i> Get A Quote</a>
+  </nav>
+  <nav class="nav-mobile">
+    <ul class="nav-mobile-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="depots.html">Depots</a></li>
+      <li><a href="sustainability.html">Sustainability</a></li>
+      <li><a href="quote.html">Get A Quote</a></li>
+    </ul>
+  </nav>
 
-    <div id="canvas-container"></div>
+  <main>
+    <section class="hero">
+      <video autoplay muted loop playsinline class="hero-video">
+        <source src="https://res.cloudinary.com/dgwtaivvf/video/upload/v1778239997/Tingi_P_Showreel_qdfrlg.mp4" type="video/mp4">
+      </video>
+      <div class="hero-inner">
+        <div>
 
-    <main class="flex-grow flex flex-col justify-center px-8 relative z-10 pointer-events-none mt-0">
-        <!-- Left Side Text Block -->
-        <div class="max-w-3xl pointer-events-auto relative">
-            <!-- Floating small text list -->
-            <div class="absolute -top-32 left-0 text-[10px] tracking-widest font-mono text-gray-200 leading-relaxed mb-12 text-shadow">
-                <p class="text-white/70 mb-1">[ ERROR 404 ]</p>
-                <p>WRONG TURN</p>
-                <p>RIGHT STUDIO</p>
-                <p>KEEP EXPLORING</p>
-                <div class="w-6 h-px bg-white/50 mt-2"></div>
-            </div>
-
-            <h1 class="text-7xl md:text-8xl lg:text-[130px] font-bold leading-[0.85] tracking-tighter mb-8 text-shadow">
-                404<span class="error-dot">.</span><br><span class="error-subhead">Lost in the<br>system.</span>
-            </h1>
-            
-            <p class="text-lg md:text-xl font-medium max-w-sm mb-10 text-gray-100 leading-snug text-shadow">
-                This page wandered off the grid. The good stuff is still one click away.
-            </p>
+          <h1>POWERING INDUSTRIAL SOUTH AFRICA YOUR SOLUTION</h1>
+          <p class="lead">Premium 50ppm diesel supply for industrial, commercial, mining, logistics, and agricultural operations.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="quote.html"><i class="fa-solid fa-arrow-right"></i> Get A Quote</a>
+            <a class="btn btn-outline" href="services.html"><i class="fa-solid fa-oil-can"></i> View Services</a>
+          </div>
         </div>
 
-        <!-- Right Side Floating Text -->
-        <div class="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 text-[10px] tracking-widest font-mono text-gray-200 leading-relaxed text-right border-r border-white/50 pr-4 text-shadow pointer-events-auto">
-            <p>PAGE NOT FOUND</p>
-            <p>IDEAS STILL HERE</p>
-            <p>BACK TO THE START</p>
-            <div class="w-6 h-px bg-white/50 mt-2 ml-auto"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title">
+
+        <h2>Choose the supply model your site, fleet, or facility needs.</h2>
+                <div class="eyebrow"><i class="fa-solid fa-sliders"></i> Fuel solutions for high-demand operations</div>
+      </div>
+      <div class="grid g5">
+        <article class="card-feature"><div class="card-feature-icon"><i class="fa-solid fa-oil-can"></i></div><h3>Bulk Diesel</h3><p>Premium 50ppm diesel delivered nationwide to industrial operations.</p><a class="btn btn-outline" href="quote.html">Request Supply</a></article>
+        <article class="card-feature"><div class="card-feature-icon"><i class="fa-solid fa-truck-droplet"></i></div><h3>Mobile Refueling</h3><p>On-site fuel delivery for fleet and equipment operations.</p><a class="btn btn-outline" href="quote.html">Schedule Service</a></article>
+        <article class="card-feature"><div class="card-feature-icon"><i class="fa-solid fa-warehouse"></i></div><h3>Tanks</h3><p>Storage and dispensing equipment for operational fuel security.</p></article>
+        <article class="card-feature"><div class="card-feature-icon"><i class="fa-solid fa-vial"></i></div><h3>Testing</h3><p>On-site quality verification before acceptance.</p></article>
+        <article class="card-feature"><div class="card-feature-icon"><i class="fa-solid fa-file-contract"></i></div><h3>Contracts</h3><p>Stable long-term agreements for ongoing demand.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title"><div class="eyebrow"><i class="fa-solid fa-diagram-project"></i> How Tingi delivers fuel</div></div>
+      <div class="process-flow">
+        <div class="card-process"><div class="card-process-step">01</div><div><h4>Confirm</h4><p>Confirm your volume, grade, delivery window, and location.</p></div></div>
+        <div class="card-process"><div class="card-process-step">02</div><div><h4>Route</h4><p>Route supply from the closest available depot in the national network.</p></div></div>
+        <div class="card-process"><div class="card-process-step">03</div><div><h4>Dispatch</h4><p>Dispatch HSE-compliant delivery units to your site or fleet.</p></div></div>
+        <div class="card-process"><div class="card-process-step">04</div><div><h4>Test</h4><p>Test product on-site and document quality before acceptance.</p></div></div>
+        <div class="card-process"><div class="card-process-step">05</div><div><h4>Maintain</h4><p>Maintain repeat supply schedules for ongoing industrial demand.</p></div></div>
+      </div>
+    </section>
+
+    <section class="panel-dark">
+      <div class="section-title"><div class="eyebrow"><i class="fa-solid fa-map-location-dot"></i> 7 depots. One countrywide supply network.</div><h2>Schedule Delivery</h2></div>
+      <div class="depot-node-grid">
+        <article class="card-depot"><div class="card-depot-top"><span class="depot-badge"><i class="fa-solid fa-hashtag"></i> 01</span><span class="depot-status">active</span></div><h4>Midrand</h4><p>Gauteng - Head Office & Primary Depot</p></article>
+        <article class="card-depot"><div class="card-depot-top"><span class="depot-badge"><i class="fa-solid fa-hashtag"></i> 02</span><span class="depot-status">active</span></div><h4>Cape Town</h4><p>Western Cape - Regional Distribution</p></article>
+        <article class="card-depot"><div class="card-depot-top"><span class="depot-badge"><i class="fa-solid fa-hashtag"></i> 03</span><span class="depot-status">active</span></div><h4>Bloemfontein</h4><p>Free State - Central South Africa</p></article>
+        <article class="card-depot"><div class="card-depot-top"><span class="depot-badge"><i class="fa-solid fa-hashtag"></i> 04</span><span class="depot-status">active</span></div><h4>Mpumalanga</h4><p>Mining & Industrial Depot</p></article>
+        <article class="card-depot"><div class="card-depot-top"><span class="depot-badge"><i class="fa-solid fa-hashtag"></i> 05</span><span class="depot-status">active</span></div><h4>Bapong</h4><p>North West Regional Depot</p></article>
+        <article class="card-depot"><div class="card-depot-top"><span class="depot-badge"><i class="fa-solid fa-hashtag"></i> 06</span><span class="depot-status">active</span></div><h4>Pietermaritzburg</h4><p>KwaZulu-Natal Depot</p></article>
+        <article class="card-depot"><div class="card-depot-top"><span class="depot-badge"><i class="fa-solid fa-hashtag"></i> 07</span><span class="depot-status">active</span></div><h4>Makhado</h4><p>Limpopo Northern Depot</p></article>
+      </div>
+    </section>
+
+    <section>
+      <div class="grid g2">
+        <div>
+          <div class="eyebrow"><i class="fa-solid fa-leaf"></i> Sustainability</div>
+          <h2>Sustainability is our core value.</h2>
+          <p>Our vision for the fuel industry is fused with the world's vision: balancing energy security and affordability with environmental responsibility and socio-economic development.</p>
         </div>
-    </main>
+        <div class="grid g3">
+          <article class="card-stat light"><div class="card-stat-value">50ppm</div><div class="card-stat-label">Clean Fuel Economy</div></article>
+          <article class="card-stat light"><div class="card-stat-value">Balanced</div><div class="card-stat-label">Energy Security</div></article>
+          <article class="card-stat light"><div class="card-stat-value">Youth</div><div class="card-stat-label">Job Creation</div></article>
+        </div>
+      </div>
+    </section>
 
-    <script>
-        // Setup Three.js scene
-        const container = document.getElementById('canvas-container');
-        const scene = new THREE.Scene();
-        // Deep red backdrop prevents black seams between the densely packed bubbles.
-        scene.background = new THREE.Color(0xa92117);
-        
-        // Add subtle fog to blend objects in distance
-        scene.fog = new THREE.FogExp2(0xa92117, 0.012);
+    <section>
+      <div class="grid g2">
+        <div>
+          <div class="eyebrow"><i class="fa-solid fa-phone-volume"></i> Get In Touch</div>
+          <h2>Contact us, and get pumped.</h2>
+          <p>Ready to order bulk diesel or discuss a fuel supply contract? Our team is standing by.</p>
+          <ul class="icon-list">
+            <li><i class="fa-solid fa-building"></i><span>Head Office: 546 16th Road, Randjespark, Midrand, 1685, Johannesburg</span></li>
+            <li><i class="fa-solid fa-triangle-exclamation"></i><span>Emergency Supply: 24 / 7 available for urgent fuel demand and on-demand delivery.</span></li>
+          </ul>
+        </div>
+        <div class="card-feature" style="border-width:2px;">
+          <h3>Request A Quote</h3>
+          <form>
+            <div class="f-row"><div><label>Full Name</label><input type="text"></div><div><label>Company</label><input type="text"></div></div>
+            <div><label>Email Address</label><input type="email"></div>
+            <div><label>Service Required</label><select><option>Bulk Diesel - 50ppm</option></select></div>
+            <div><label>Message</label><textarea placeholder="Describe fuel requirements, volume, location, and timing."></textarea></div>
+            <button class="btn btn-primary" type="button"><i class="fa-solid fa-paper-plane"></i> Send Enquiry</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  
 
-        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-        camera.position.z = 18;
-        // Angle camera slightly down as seen in reference
-        camera.position.y = 3;
-        camera.lookAt(0, 0, 0);
+    <section class="page-gallery">
+      <div class="section-title">
 
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 700 ? 1.5 : 2)); // optimize for high dpi
-        
-        // Soft shadows
-        renderer.shadowMap.enabled = window.innerWidth >= 768;
-        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-        container.appendChild(renderer.domElement);
+        <h2>Operational scenes from fuel logistics and energy infrastructure.</h2>
+                <div class="eyebrow"><i class="fa-solid fa-camera"></i> Petroleum Operations Gallery</div>
+      </div>
+      <div class="gallery-grid">
+        <figure class="gallery-item"><img src="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538929/Yellow_tanker_on_the_motorway_wjhety.png?auto=format&fit=crop&w=1400&q=80" alt="Fuel tanker at industrial depot" loading="lazy"></figure>
+        <figure class="gallery-item"><img src="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538918/Blue_and_yellow_storage_tanks_under_sun_bldbyx.png?auto=format&fit=crop&w=1400&q=80" alt="Industrial fuel storage tanks" loading="lazy"></figure>
+        <figure class="gallery-item"><img src="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538975/Tingi_Petroleum_pumpjack_in_the_landscape_rlpe0o.png?auto=format&fit=crop&w=1400&q=80" alt="Energy facility at sunset" loading="lazy"></figure>
+      </div>
+    </section>
+  </main>
 
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-        scene.add(ambientLight);
-
-        const mainLight = new THREE.DirectionalLight(0xffffff, 0.8);
-        mainLight.position.set(10, 20, 10);
-        mainLight.castShadow = true;
-        mainLight.shadow.mapSize.width = 2048;
-        mainLight.shadow.mapSize.height = 2048;
-        scene.add(mainLight);
-        
-        const fillLight = new THREE.DirectionalLight(0xffa0a0, 0.3);
-        fillLight.position.set(-10, 0, -10);
-        scene.add(fillLight);
-
-        // Risograph-inspired ink: irregular halftone dots, paper grain, ink dropout,
-        // and slight misregistration. Generated once and reused across the field.
-        function makeRisoTexture(base, ink, seed) {
-            const size = 512;
-            const canvas = document.createElement('canvas');
-            canvas.width = canvas.height = size;
-            const ctx = canvas.getContext('2d');
-            let state = seed;
-            const random = () => {
-                state = (Math.imul(state, 1664525) + 1013904223) | 0;
-                return (state >>> 0) / 4294967296;
-            };
-            ctx.fillStyle = base;
-            ctx.fillRect(0, 0, size, size);
-            // Tiny scattered fibers and pigment dropout create the uncoated-paper feel.
-            for (let i = 0; i < 39000; i++) {
-                const x = random() * size, y = random() * size;
-                const light = random() > .47;
-                ctx.fillStyle = light ? 'rgba(255,244,224,.18)' : 'rgba(64,12,8,.16)';
-                const d = .4 + random() * 1.9;
-                ctx.fillRect(x, y, d, d * (.5 + random()));
-            }
-            // Loose rotated halftone screen with variable ink coverage.
-            ctx.save();
-            ctx.translate(size / 2, size / 2);
-            ctx.rotate(-Math.PI / 11);
-            const step = 13;
-            for (let y = -380; y < 380; y += step) {
-                for (let x = -380; x < 380; x += step) {
-                    const variance = random();
-                    if (variance < .12) continue;
-                    const r = .75 + variance * 2.2;
-                    ctx.beginPath();
-                    ctx.ellipse(x + (random()-.5)*2.1, y + (random()-.5)*2.1,
-                        r, r * (.8 + random()*.4), random()*.5, 0, Math.PI*2);
-                    ctx.fillStyle = ink;
-                    ctx.fill();
-                }
-            }
-            ctx.restore();
-            // Occasional visible ink clusters, without overpowering facial features.
-            for (let i = 0; i < 1050; i++) {
-                ctx.beginPath();
-                ctx.arc(random()*size, random()*size, .3+random()*1.25, 0, Math.PI*2);
-                ctx.fillStyle = random()>.5 ? 'rgba(255,245,227,.19)' : 'rgba(66,10,8,.18)';
-                ctx.fill();
-            }
-            const texture = new THREE.CanvasTexture(canvas);
-            texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-            texture.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
-            texture.colorSpace = THREE.SRGBColorSpace || undefined;
-            return texture;
-        }
-        const redRisoMap = makeRisoTexture('#ff402b', 'rgba(135,18,12,.24)', 917);
-        const whiteRisoMap = makeRisoTexture('#f4eee6', 'rgba(115,91,81,.19)', 251);
-
-        // Create base materials
-        const redColor = 0xff331f; // Orange-red color matching image
-        const whiteColor = 0xf5f5f5;
-
-        // Custom shader material for soft matte look with subtle rim lighting
-        const customMaterialSettings = {
-            roughness: 0.7,
-            metalness: 0.1,
-            clearcoat: 0.1,
-            clearcoatRoughness: 0.8,
-        };
-
-        const redMaterial = new THREE.MeshPhysicalMaterial({
-            color: 0xffffff,
-            map: redRisoMap,
-            ...customMaterialSettings
-        });
-
-        const whiteMaterial = new THREE.MeshPhysicalMaterial({
-            color: 0xffffff,
-            map: whiteRisoMap,
-            ...customMaterialSettings
-        });
-
-        const blackMaterial = new THREE.MeshBasicMaterial({ color: 0x111111 });
-
-        // Dense, soft fiber shading plus actual tapered fur strands for a fuzzy silhouette.
-        const sphereGeometry = new THREE.SphereGeometry(1.5, window.innerWidth < 768 ? 32 : 64, window.innerWidth < 768 ? 24 : 48);
-        const furrySurface = (material) => {
-            material.roughness = 1;
-            material.metalness = 0;
-            material.clearcoat = 0;
-            material.onBeforeCompile = shader => {
-                shader.fragmentShader = shader.fragmentShader.replace(
-                    '#include <common>',
-                    `#include <common>
-float furHash(vec3 p){return fract(sin(dot(p,vec3(127.1,311.7,74.7)))*43758.5453);}`
-                ).replace(
-                    '#include <color_fragment>',
-                    `#include <color_fragment>
-float fiber = furHash(floor(vViewPosition * 155.0));
-diffuseColor.rgb *= 0.89 + fiber * 0.19;`
-                );
-            };
-            material.needsUpdate = true;
-        };
-        furrySurface(redMaterial);
-        furrySurface(whiteMaterial);
-        // Individual tapered hairs are instanced (two draw calls), not one mesh per hair.
-        const isSmallScreen = window.innerWidth < 768;
-        const hairsPerRed = isSmallScreen ? 24 : 65;
-        const hairsOnWhite = isSmallScreen ? 400 : 760;
-        const hairLength = isSmallScreen ? 0.19 : 0.23;
-        const hairGeometry = new THREE.ConeGeometry(0.013, 1, 3, 1);
-        hairGeometry.translate(0, 0.5, 0); // root at origin
-        const redHairMaterial = new THREE.MeshLambertMaterial({ color: 0xe8402c, side: THREE.DoubleSide, transparent: true, opacity: .92 });
-        const whiteHairMaterial = new THREE.MeshLambertMaterial({ color: 0xeee5dc, side: THREE.DoubleSide, transparent: true, opacity: .93 });
-        const redHair = new THREE.InstancedMesh(hairGeometry, redHairMaterial, 16 * 22 * hairsPerRed);
-        const whiteHair = new THREE.InstancedMesh(hairGeometry, whiteHairMaterial, hairsOnWhite);
-        redHair.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-        whiteHair.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-        redHair.frustumCulled = false;
-        whiteHair.frustumCulled = false;
-        scene.add(redHair, whiteHair);
-        const hairRoots = [];
-        const goldenAngle = Math.PI * (3 - Math.sqrt(5));
-        const hairMatrix = new THREE.Matrix4();
-        const hairPosition = new THREE.Vector3();
-        const hairDirection = new THREE.Vector3();
-        const hairQuaternion = new THREE.Quaternion();
-        const hairScale = new THREE.Vector3();
-        const upVector = new THREE.Vector3(0, 1, 0);
-        function hairSeed(index, count, phase) {
-            const v = (index + .5) / count;
-            const y = 1 - 2 * v;
-            const radius = Math.sqrt(Math.max(0, 1 - y*y));
-            const theta = goldenAngle * index + phase;
-            return new THREE.Vector3(Math.cos(theta)*radius, y, Math.sin(theta)*radius);
-        }
-        function updateFur() {
-            bubbleField.updateMatrixWorld(true);
-            camera.updateMatrixWorld(true);
-            let redIndex = 0;
-            for (let b = 0; b < spheres.length; b++) {
-                const data = spheres[b];
-                const featured = data.isWhite;
-                const count = featured ? hairsOnWhite : hairsPerRed;
-                const fieldMatrix = featured && mobileFeatured ? camera.matrixWorld : bubbleField.matrixWorld;
-                const worldMatrix = new THREE.Matrix4().multiplyMatrices(fieldMatrix, data.mesh.matrix);
-                for (let i = 0; i < count; i++) {
-                    const normal = hairSeed(i, count, b * 2.39);
-                    // Keep facial features legible: no hair directly over the eyes or mouth.
-                    if (normal.z > 0.87 && Math.abs(normal.x) < .65 && normal.y > -.37 && normal.y < .35) {
-                        normal.z *= .96;
-                    }
-                    hairPosition.copy(normal).multiplyScalar(1.48).applyMatrix4(worldMatrix);
-                    hairDirection.copy(normal).transformDirection(worldMatrix);
-                    hairDirection.x += Math.sin(i * 17.3 + b) * .12;
-                    hairDirection.y += Math.cos(i * 11.7 + b) * .10;
-                    hairDirection.normalize();
-                    hairQuaternion.setFromUnitVectors(upVector, hairDirection);
-                    const worldScale = data.mesh.scale.x;
-                    hairScale.setScalar(1);
-                    hairScale.set((i % 4 === 0 ? .025 : .018) * worldScale, hairLength * (.65 + (i % 7)/10) * worldScale, (i % 4 === 0 ? .025 : .018) * worldScale);
-                    hairMatrix.compose(hairPosition, hairQuaternion, hairScale);
-                    if (featured) whiteHair.setMatrixAt(i, hairMatrix);
-                    else redHair.setMatrixAt(redIndex++, hairMatrix);
-                }
-            }
-            redHair.count = redIndex;
-            redHair.instanceMatrix.needsUpdate = true;
-            whiteHair.instanceMatrix.needsUpdate = true;
-        }
-        
-        // Helper function to create face features (eyes and mouth)
-        function addFaceFeatures(sphereMesh, isWhite = false) {
-            // Eyes
-            const eyeGeo = new THREE.CylinderGeometry(0.15, 0.15, 0.1, 16);
-            eyeGeo.rotateX(Math.PI / 2);
-            
-            const leftEye = new THREE.Mesh(eyeGeo, isWhite ? blackMaterial : new THREE.MeshBasicMaterial({color: 0xffffff}));
-            leftEye.position.set(-0.5, 0.2, 1.45);
-            // Slight rotation to follow sphere curve
-            leftEye.lookAt(-0.5, 0.2, 2);
-            
-            const rightEye = new THREE.Mesh(eyeGeo, isWhite ? blackMaterial : new THREE.MeshBasicMaterial({color: 0xffffff}));
-            rightEye.position.set(0.5, 0.2, 1.45);
-            rightEye.lookAt(0.5, 0.2, 2);
-
-            // Mouth (straight line)
-            const mouthGeo = new THREE.BoxGeometry(0.8, 0.08, 0.1);
-            const mouth = new THREE.Mesh(mouthGeo, isWhite ? blackMaterial : new THREE.MeshBasicMaterial({color: 0xffffff}));
-            mouth.position.set(0, -0.3, 1.48);
-            // Bend mouth slightly to match sphere curve (using a simple box for performance, but curved would be better)
-            // For a perfect replica, we'd use a curved tube geometry here
-            
-            // Group them
-            const faceGroup = new THREE.Group();
-            faceGroup.add(leftEye);
-            faceGroup.add(rightEye);
-            faceGroup.add(mouth);
-            
-            sphereMesh.add(faceGroup);
-            return faceGroup;
-        }
-
-        const spheres = [];
-        // Rotate the entire packed bubble field into an isometric, three-quarter view.
-        const bubbleField = new THREE.Group();
-        bubbleField.rotation.set(-0.32, -0.38, -0.08);
-        scene.add(bubbleField);
-        let whiteSphereMesh = null;
-        const spacing = 3.2; // distance between sphere centers
-        
-        // Create a grid of spheres
-        const rows = 16;
-        const cols = 22;
-        
-        for (let i = 0; i < rows; i++) {
-            for (let j = 0; j < cols; j++) {
-                
-                // Calculate position based on grid
-                // Offset every other row for hexagonal packing look
-                const rowOffset = (i % 2 === 0) ? 0 : spacing / 2;
-                const x = (j - (cols - 1)/2) * spacing + rowOffset;
-                const y = - (i - (rows - 1)/2) * (spacing * 0.82); // closer y spacing for hex pack
-                const z = -0.12 * Math.abs(x) - 0.035 * Math.abs(y); // slight curve backward
-                
-                // Determine if this should be the white sphere
-                // Pick a spot roughly in the middle-right
-                const isTargetWhite = (i === 7 && j === 12);
-                
-                const mesh = new THREE.Mesh(
-                    sphereGeometry, 
-                    isTargetWhite ? whiteMaterial : redMaterial
-                );
-                
-                mesh.position.set(x, y, z);
-                mesh.castShadow = window.innerWidth >= 768;
-                mesh.receiveShadow = window.innerWidth >= 768;
-                
-                // Randomize slight rotation for variety
-                mesh.rotation.y = (Math.random() - 0.5) * 0.2;
-                mesh.rotation.x = (Math.random() - 0.5) * 0.1;
-                
-                // Add face
-                const face = addFaceFeatures(mesh, isTargetWhite);
-                
-                bubbleField.add(mesh);
-                
-                // Store data for animation
-                const sphereData = {
-                    mesh: mesh,
-                    face: face,
-                    basePosition: {x, y, z},
-                    baseRotation: {x: mesh.rotation.x, y: mesh.rotation.y},
-                    isWhite: isTargetWhite
-                };
-                
-                spheres.push(sphereData);
-                
-                if (isTargetWhite) {
-                    whiteSphereMesh = sphereData;
-                    // Ensure white sphere is slightly forward and larger for emphasis
-                    mesh.position.z += 1;
-                    mesh.scale.set(1.1, 1.1, 1.1);
-                }
-            }
-        }
-
-        // Keep the featured white bubble visible on every viewport. On narrow
-        // screens it lives in camera space, so the isometric field cannot push
-        // it outside the portrait crop or hide it behind foreground red bubbles.
-        const whiteBubbleHome = whiteSphereMesh.mesh.position.clone();
-        let mobileFeatured = false;
-        function positionFeaturedBubble() {
-            if (!whiteSphereMesh) return;
-            const mobile = window.innerWidth < 768;
-            const featured = whiteSphereMesh.mesh;
-            if (mobile !== mobileFeatured) {
-                if (mobile) {
-                    bubbleField.remove(featured);
-                    camera.add(featured);
-                    if (!camera.parent) scene.add(camera);
-                } else {
-                    camera.remove(featured);
-                    bubbleField.add(featured);
-                    featured.position.copy(whiteBubbleHome);
-                }
-                mobileFeatured = mobile;
-            }
-            if (mobile) {
-                // Upper-right quadrant, clear of the left-aligned headline.
-                // Negative camera Z is in front of the camera; no clipping.
-                const aspect = window.innerWidth / window.innerHeight;
-                const depth = 9;
-                const visibleHalfHeight = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * depth;
-                const visibleHalfWidth = visibleHalfHeight * aspect;
-                const xNdc = window.innerWidth <= 375 ? 0.40 : 0.43;
-                featured.position.set(xNdc * visibleHalfWidth, 0.37 * visibleHalfHeight, -depth);
-                // Fits narrow iPhone 8 while remaining prominent on larger phones.
-                const desiredRadius = Math.min(visibleHalfWidth * 0.43, visibleHalfHeight * 0.20);
-                featured.scale.setScalar(desiredRadius / 1.5);
-                featured.rotation.set(0, 0, 0);
-                featured.renderOrder = 10;
-            } else {
-                featured.renderOrder = 0;
-                featured.scale.setScalar(1.1);
-            }
-        }
-        positionFeaturedBubble();
-        updateFur();
-
-        // Mouse tracking
-        const mouse = new THREE.Vector2();
-        const targetMouse = new THREE.Vector2();
-        let windowHalfX = window.innerWidth / 2;
-        let windowHalfY = window.innerHeight / 2;
-
-        document.addEventListener('touchmove', (event) => {
-            if (!event.touches.length) return;
-            mouse.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-            mouse.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
-        }, { passive: true });
-
-        document.addEventListener('mousemove', (event) => {
-            // Normalized device coordinates (-1 to +1)
-            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-        });
-
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            windowHalfX = window.innerWidth / 2;
-            windowHalfY = window.innerHeight / 2;
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            positionFeaturedBubble();
-            updateFur();
-        });
-
-        const clock = new THREE.Clock();
-        let furFrame = 0;
-
-        function animate() {
-            requestAnimationFrame(animate);
-            
-            const time = clock.getElapsedTime();
-
-            // Smooth mouse follow (lerp)
-            targetMouse.x += (mouse.x - targetMouse.x) * 0.05;
-            targetMouse.y += (mouse.y - targetMouse.y) * 0.05;
-
-            // Animate all spheres
-            spheres.forEach(data => {
-                const { mesh, basePosition, isWhite } = data;
-                
-                // Idle floating animation
-                const floatY = Math.sin(time * 1.5 + basePosition.x) * 0.1;
-                if (!isWhite || !mobileFeatured) mesh.position.y = basePosition.y + floatY;
-                
-                if (isWhite) {
-                    // White sphere follows cursor exactly by rotating
-                    
-                    // Convert mouse to world position roughly at depth of sphere
-                    const vector = new THREE.Vector3(targetMouse.x, targetMouse.y, 0.5);
-                    vector.unproject(camera);
-                    const dir = vector.sub(camera.position).normalize();
-                    const distance = -camera.position.z / dir.z;
-                    const pos = camera.position.clone().add(dir.multiplyScalar(distance));
-                    
-                    // Look at cursor position
-                    // We only want slight rotation, not full looking
-                    const lookFactorX = targetMouse.x * 0.8;
-                    const lookFactorY = targetMouse.y * 0.8;
-                    
-                    // Apply rotation directly
-                    if (mobileFeatured) {
-                        mesh.rotation.y = lookFactorX * 0.25;
-                        mesh.rotation.x = -lookFactorY * 0.25;
-                    } else {
-                        mesh.rotation.y = lookFactorX;
-                        mesh.rotation.x = -lookFactorY;
-                    }
-                    
-                } else {
-                    // Red spheres subtly follow white sphere or just bob
-                    // Calculate distance to white sphere
-                    if (whiteSphereMesh) {
-                        const dx = mesh.position.x - whiteSphereMesh.mesh.position.x;
-                        const dy = mesh.position.y - whiteSphereMesh.mesh.position.y;
-                        const dist = Math.sqrt(dx*dx + dy*dy);
-                        
-                        // Spheres closer to center move slightly more
-                        const influence = Math.max(0, 1 - dist/15);
-                        
-                        mesh.rotation.y = data.baseRotation.y + (targetMouse.x * 0.2 * influence);
-                        mesh.rotation.x = data.baseRotation.x - (targetMouse.y * 0.2 * influence);
-                    }
-                }
-            });
-
-            // Very subtle camera movement based on mouse
-            camera.position.x += (targetMouse.x * 0.5 - camera.position.x) * 0.02;
-            camera.position.y += (-targetMouse.y * 0.35 + 3 - camera.position.y) * 0.02;
-            camera.lookAt(0, 0, 0);
-            // Maintain the diagonal/isometric view while adding restrained parallax.
-            bubbleField.rotation.y += (-0.38 + targetMouse.x * 0.035 - bubbleField.rotation.y) * 0.025;
-            bubbleField.rotation.x += (-0.32 - targetMouse.y * 0.025 - bubbleField.rotation.x) * 0.025;
-
-            // Update fur every other frame on mobile to preserve responsive interaction.
-            if (++furFrame % (isSmallScreen ? 2 : 1) === 0) updateFur();
-            renderer.render(scene, camera);
-        }
-
-        // Start animation loop
-        animate();
-        
-        // Add a nice entrance animation for the UI elements
-        window.addEventListener('load', () => {
-            
-            gsap.from("h1", {
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                delay: 0.3,
-                ease: "power3.out"
-            });
-            
-            gsap.from("main p", {
-                y: 20,
-                opacity: 0,
-                duration: 1,
-                delay: 0.5,
-                ease: "power3.out"
-            });
-            
-            gsap.from(".absolute.left-0", {
-                x: -30,
-                opacity: 0,
-                duration: 1,
-                delay: 0.8,
-                ease: "power3.out"
-            });
-            
-            gsap.from(".absolute.right-8", {
-                x: 30,
-                opacity: 0,
-                duration: 1,
-                delay: 0.8,
-                ease: "power3.out"
-            });
-            
-            // animate spheres in
-            spheres.filter(data => !data.isWhite).forEach((data, index) => {
-                gsap.from(data.mesh.scale, {
-                    x: 0, y: 0, z: 0,
-                    duration: 1.5,
-                    delay: 0.5 + (Math.random() * 0.5),
-                    ease: "elastic.out(1, 0.5)"
-                });
-            });
-        });
-
-    </script>
+  <footer>
+    <div class="footer-grid">
+      <div><div class="footer-brand"><img src="https://res.cloudinary.com/dgwtaivvf/image/upload/v1777538921/TINGI-Variation2_gpwqii.png" alt="Tingi Petroleum Logo" style="height: 32px; width: auto; margin-bottom: 8px;"></div><p>South Africa's leading clean fuel provider. We supply more than just fuel - sustainability is our core value.</p><p>0733 511 918<br>nkantingi@yahoo.com</p></div>
+      <div><h4>Company</h4><ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="about.html">Our Vision</a></li><li><a href="about.html">Compliance</a></li></ul></div>
+      <div><h4>Services</h4><ul class="footer-links"><li><a href="services.html">Bulk Diesel</a></li><li><a href="services.html">Mobile Refueling</a></li><li><a href="services.html">Tanks & Equipment</a></li></ul></div>
+      <div><h4>Depots</h4><ul class="footer-links"><li><a href="depots.html">Midrand</a></li><li><a href="depots.html">Cape Town</a></li><li><a href="depots.html">Makhado</a></li><li><a href="quote.html">Get A Quote</a></li></ul></div>
+    </div>
+    <div class="footer-copy">© 2026 Tingi Financial Services (Pty) Ltd. Trading as Tingi Petroleum Services. This website was developed by Occxlnce.</div>
+  </footer>
 </body>
 </html>
